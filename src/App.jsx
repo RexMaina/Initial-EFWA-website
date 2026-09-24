@@ -3,6 +3,7 @@ import "./App.css";
 import { supabase } from "./lib/supabaseClient";
 import logo from "./assets/logo.jpeg";
 import efwaLogo from "./assets/efwa-logo.jpeg";
+import imager from "./assets/imager.png";
 import image1 from "./assets/image1.jpeg";
 import image2 from "./assets/image2.jpg";
 import image3 from "./assets/image3.jpg";
@@ -11,6 +12,9 @@ import image8 from "./assets/image8.jpeg";
 import image9 from "./assets/image9.jpeg";
 import imageF from "./assets/imagef.jpeg";
 import imageG from "./assets/imageg.jpeg";
+import imageL from "./assets/imagel.jpeg";
+import imageM from "./assets/imagem.jpeg";
+import imageN from "./assets/imagen.jpeg";
 import imageA from "./assets/imagea.jpeg";
 import imageB from "./assets/imageb.jpeg";
 import imageC from "./assets/imagec.jpeg";
@@ -259,6 +263,8 @@ export default function App() {
 
   const [awardVotePhone, setAwardVotePhone] = useState("");
 
+  const [awardVoteQuantity, setAwardVoteQuantity] = useState(1);
+
   const [awardVoteIsSubmitting, setAwardVoteIsSubmitting] = useState(false);
 
   const [awardVotePaymentStage, setAwardVotePaymentStage] = useState("idle");
@@ -274,6 +280,8 @@ export default function App() {
   const femaleAwardContestants = awardContestants.filter(
     (contestant) => contestant.award_category === "female_model_of_the_year"
   );
+
+  const awardVoteTotal = AWARD_VOTE_FEE * Number(awardVoteQuantity || 0);
 
   /* =========================================================
 
@@ -1811,6 +1819,8 @@ export default function App() {
 
     setAwardVotePhone("");
 
+    setAwardVoteQuantity(1);
+
     setAwardVotePaymentStage("idle");
 
     setAwardVoteExternalReference("");
@@ -1864,7 +1874,9 @@ export default function App() {
     setAwardVotePaymentStage("finalizing");
 
     setAwardVotePaymentMessage(
-      "Payment confirmed. Counting your vote..."
+      `Payment confirmed. Counting your ${
+        Number(awardVoteQuantity) === 1 ? "vote" : "votes"
+      }...`
     );
 
     const { data, error } = await supabase.functions.invoke(
@@ -1927,12 +1939,21 @@ export default function App() {
 
     setAwardVotePaymentStage("success");
 
+    const confirmedVoteCount =
+      Number(data?.votesAdded) > 0
+        ? Number(data.votesAdded)
+        : Number(awardVoteQuantity);
+
     setAwardVotePaymentMessage(
-      `Payment confirmed. Your vote for ${
+      `Payment confirmed. ${confirmedVoteCount} ${
+        confirmedVoteCount === 1 ? "vote" : "votes"
+      } for ${
         data?.contestant?.contestant_name ||
         awardVoteContestant?.contestant_name ||
         "the selected contestant"
-      } has been counted.`
+      } ${
+        confirmedVoteCount === 1 ? "has" : "have"
+      } been counted.`
     );
 
     setAwardVoteExternalReference("");
@@ -2079,6 +2100,21 @@ export default function App() {
 
     }
 
+    const voteQuantity = Number(awardVoteQuantity);
+
+    if (
+      !Number.isInteger(voteQuantity) ||
+      voteQuantity < 1
+    ) {
+
+      setAwardVotePaymentMessage(
+        "Enter a valid number of votes. The minimum is 1 vote."
+      );
+
+      return;
+
+    }
+
     if (!awardVotePhone.trim()) {
 
       setAwardVotePaymentMessage(
@@ -2108,6 +2144,8 @@ export default function App() {
             phone: awardVotePhone.trim(),
 
             contestantId: awardVoteContestant.id,
+
+            voteCount: voteQuantity,
 
           },
 
@@ -2145,7 +2183,11 @@ export default function App() {
       setAwardVotePaymentStage("waiting");
 
       setAwardVotePaymentMessage(
-        "M-Pesa request sent. Check the phone and enter the M-Pesa PIN. Waiting for payment confirmation..."
+        `M-Pesa request sent for KSh ${(
+          AWARD_VOTE_FEE * voteQuantity
+        ).toLocaleString("en-KE")} (${voteQuantity} ${
+          voteQuantity === 1 ? "vote" : "votes"
+        }). Check the phone and enter the M-Pesa PIN. Waiting for payment confirmation...`
       );
 
       await waitForAwardVotePayment(
@@ -2185,7 +2227,9 @@ export default function App() {
     }
 
     if (awardVotePaymentStage === "finalizing") {
-      return "Counting Vote...";
+      return Number(awardVoteQuantity) === 1
+        ? "Counting Vote..."
+        : "Counting Votes...";
     }
 
     if (awardVotePaymentStage === "pending") {
@@ -2193,10 +2237,12 @@ export default function App() {
     }
 
     if (awardVotePaymentStage === "success") {
-      return "Vote Counted";
+      return Number(awardVoteQuantity) === 1
+        ? "Vote Counted"
+        : "Votes Counted";
     }
 
-    return `Send M-Pesa Prompt · KSh ${AWARD_VOTE_FEE}`;
+    return `Send M-Pesa Prompt · KSh ${awardVoteTotal.toLocaleString("en-KE")}`;
 
   })();
 
@@ -2226,9 +2272,9 @@ export default function App() {
 
             <img
 
-              src={logo}
+              src={imager}
 
-              alt="Face Off Agencies Kenya"
+              alt="Embu Fashion Weekend & Awards"
 
             />
 
@@ -2236,9 +2282,9 @@ export default function App() {
 
           <span className="logo-text">
 
-            <strong>FACE OFF</strong>
+            <strong>EMBU FASHION</strong>
 
-            <em>Agencies Kenya</em>
+            <em>Weekend &amp; Awards</em>
 
           </span>
 
@@ -2354,7 +2400,7 @@ export default function App() {
 
             <a
 
-              href="#contact"
+              href="#awards-voting"
 
               className="mobile-book"
 
@@ -2362,7 +2408,7 @@ export default function App() {
 
             >
 
-              Book Us
+              Vote Now
 
             </a>
 
@@ -2374,13 +2420,13 @@ export default function App() {
 
           <a
 
-            href="#contact"
+            href="#awards-voting"
 
             className="nav-cta"
 
           >
 
-            Book Us
+            Vote Now
 
           </a>
 
@@ -2434,37 +2480,31 @@ export default function App() {
 
           <span className="hero-tag">
 
-            Talent · Modeling · Media — Nairobi, Kenya
+            Talent Management · Digital Marketing, Media Strategy &amp; Production · Unified SaaS Platform · Events
 
           </span>
 
           <h1>
 
-            Your Face.
+            Embu Fashion Weekend &amp; Awards 2026
 
-            <br />
-
-            Our Platform.
-
-            <br />
-
-            One Runway.
-
-          </h1>
+           </h1>
+<h2 className="hero-subheadline">
+  Turning Creative and Performing Arts into Sustainable Talent Entrepreneurship
+</h2>
+          
 
           <p>
 
-            Face Off Agencies Kenya sources, trains, and
+            Experience Embu Fashion Weekend &amp; Awards 2026 — a vibrant
 
-            places models, brand ambassadors, and event
+            celebration of fashion, music, creative arts, lifestyle,
 
-            talent across the country, while producing the
+            enterprise, and regional talent. Vote for your favourite model,
 
-            marketing and media that puts them in front of
+            register to take the runway, showcase your designs, or put your
 
-            the right audience. From casting calls to
-
-            campaign day, we run the whole show.
+            brand in front of the audience as an exhibitor.
 
           </p>
 
@@ -2472,25 +2512,53 @@ export default function App() {
 
             <a
 
-              href="#apply"
+              href="#awards-voting"
 
               className="btn-p"
 
             >
 
-              Apply as a Model
+              Vote Now
 
             </a>
 
             <a
 
-              href="#efwa"
+              href="#apply"
 
               className="btn-g"
 
             >
 
-              Discover EFWA{" "}
+              Model Registration{" "}
+
+              <span className="arr">→</span>
+
+            </a>
+
+            <a
+
+              href="#designers"
+
+              className="btn-g"
+
+            >
+
+              Designer Registration{" "}
+
+              <span className="arr">→</span>
+
+            </a>
+
+            <a
+
+              href="#exhibitors"
+
+              className="btn-g"
+
+            >
+
+              Exhibitor Registration{" "}
 
               <span className="arr">→</span>
 
@@ -4716,7 +4784,7 @@ export default function App() {
               <h3>Best Male Model of the Year 2026</h3>
 
               <p className="award-vote-instruction">
-                Select one contestant. Each confirmed vote costs KSh {AWARD_VOTE_FEE}.
+                Select one contestant. Choose the number of votes during payment. Each confirmed vote costs KSh {AWARD_VOTE_FEE}.
               </p>
 
               <div className="award-contestants">
@@ -4757,7 +4825,7 @@ export default function App() {
                 disabled={!selectedMaleContestant}
                 onClick={() => handleAwardVote("male")}
               >
-                Vote KSh {AWARD_VOTE_FEE}
+                Vote · KSh {AWARD_VOTE_FEE} each
               </button>
             </div>
           </article>
@@ -4776,7 +4844,7 @@ export default function App() {
               <h3>Best Female Model of the Year 2026</h3>
 
               <p className="award-vote-instruction">
-                Select one contestant. Each confirmed vote costs KSh {AWARD_VOTE_FEE}.
+                Select one contestant. Choose the number of votes during payment. Each confirmed vote costs KSh {AWARD_VOTE_FEE}.
               </p>
 
               <div className="award-contestants">
@@ -4817,7 +4885,7 @@ export default function App() {
                 disabled={!selectedFemaleContestant}
                 onClick={() => handleAwardVote("female")}
               >
-                Vote KSh {AWARD_VOTE_FEE}
+                Vote · KSh {AWARD_VOTE_FEE} each
               </button>
             </div>
           </article>
@@ -4828,6 +4896,143 @@ export default function App() {
             {awardVoteMessage}
           </p>
         )}
+      </section>
+
+      {/* =====================================================
+
+          ADDITIONAL EMBU FASHION AWARDS — NOMINATIONS
+
+      ====================================================== */}
+
+      <section
+        className="special-awards-section"
+        id="award-nominations"
+      >
+        <div className="special-awards-heading reveal">
+          <span className="special-awards-kicker">
+            Embu Fashion Awards 2026
+          </span>
+
+          <h2>
+            Additional Award
+            <br />
+            Categories
+          </h2>
+
+          <p>
+            Celebrating the creatives, storytellers, and industry
+            personalities helping shape fashion and the creative economy.
+          </p>
+        </div>
+
+        <div className="special-awards-grid reveal">
+
+          <article className="special-award-card">
+            <div className="special-award-image">
+              <img
+                src={imageL}
+                alt="Embu Fashion Awards Best Videography of the Year 2026 trophy"
+              />
+            </div>
+
+            <div className="special-award-content">
+              <span className="special-award-label">
+                Media &amp; Production
+              </span>
+
+              <h3>
+                Best Videography
+                <br />
+                of the Year 2026
+              </h3>
+
+              <p>
+                Recognising outstanding visual storytelling, creative
+                direction, and video production within fashion, events,
+                lifestyle, and the creative arts.
+              </p>
+            </div>
+          </article>
+
+          <article className="special-award-card">
+            <div className="special-award-image">
+              <img
+                src={imageM}
+                alt="Embu Fashion Awards Best Photographer of the Year 2026 trophy"
+              />
+            </div>
+
+            <div className="special-award-content">
+              <span className="special-award-label">
+                Photography
+              </span>
+
+              <h3>
+                Best Photographer
+                <br />
+                of the Year 2026
+              </h3>
+
+              <p>
+                Celebrating photographers whose work captures fashion,
+                people, culture, events, and creative expression with
+                originality and impact.
+              </p>
+            </div>
+          </article>
+
+          <article className="special-award-card">
+            <div className="special-award-image">
+              <img
+                src={imageN}
+                alt="Embu Fashion Awards Fashion Enthusiast Leader 2026 trophy"
+              />
+            </div>
+
+            <div className="special-award-content">
+              <span className="special-award-label">
+                Fashion Leadership
+              </span>
+
+              <h3>
+                Fashion Enthusiast
+                <br />
+                Leader 2026
+              </h3>
+
+              <p>
+                Recognising a passionate fashion advocate whose leadership,
+                visibility, and support continue to create opportunities
+                within the creative community.
+              </p>
+            </div>
+          </article>
+
+        </div>
+
+        <div className="special-awards-nomination reveal">
+          <span className="special-awards-nomination-kicker">
+            Nominations Open
+          </span>
+
+          <h3>
+            Know Someone Who Deserves Recognition?
+          </h3>
+
+          <p>
+            Nominate an outstanding creative or fashion industry personality
+            for one of these award categories. Send the nominee&apos;s full
+            name, award category, contact details, and a short reason for the
+            nomination by email.
+          </p>
+
+          <a
+            className="special-awards-email"
+            href="mailto:faceoffagencieske@gmail.com?subject=Embu%20Fashion%20Awards%202026%20Nomination"
+          >
+            Nominate Your Candidate
+          </a>
+        </div>
       </section>
 
       {/* =====================================================
@@ -4888,8 +5093,8 @@ export default function App() {
                 <strong>
                   {awardVoteContestant.contestant_name}
                 </strong>
-                . Enter the Safaricom number that should receive the
-                KSh {AWARD_VOTE_FEE} M-Pesa STK Push.
+                . Choose the number of votes you want to cast, then enter the
+                Safaricom number that should receive the M-Pesa STK Push.
               </p>
 
             </div>
@@ -4904,18 +5109,20 @@ export default function App() {
                 <div>
 
                   <span className="payment-summary-label">
-                    Voting Fee
+                    Voting Total
                   </span>
 
                   <strong>
-                    KSh {AWARD_VOTE_FEE}
+                    KSh {awardVoteTotal.toLocaleString("en-KE")}
                   </strong>
 
                 </div>
 
                 <p>
-                  One successful KSh {AWARD_VOTE_FEE} payment counts as
-                  one vote for the selected contestant.
+                  {Number(awardVoteQuantity || 0)}{" "}
+                  {Number(awardVoteQuantity) === 1 ? "vote" : "votes"} ×
+                  {" "}KSh {AWARD_VOTE_FEE} per vote. The selected contestant
+                  receives the votes only after the full payment is confirmed.
                 </p>
 
                 {awardVoteExternalReference && (
@@ -4925,6 +5132,49 @@ export default function App() {
                   </span>
 
                 )}
+
+              </div>
+
+              <div className="form-group form-group-full">
+
+                <label htmlFor="awardVoteQuantity">
+                  Number of Votes
+                </label>
+
+                <input
+                  type="number"
+                  id="awardVoteQuantity"
+                  name="awardVoteQuantity"
+                  min="1"
+                  step="1"
+                  inputMode="numeric"
+                  value={awardVoteQuantity}
+                  onChange={(event) => {
+                    const value = event.target.value;
+
+                    if (value === "") {
+                      setAwardVoteQuantity("");
+                      return;
+                    }
+
+                    const parsedValue = Number(value);
+
+                    if (Number.isInteger(parsedValue) && parsedValue >= 1) {
+                      setAwardVoteQuantity(parsedValue);
+                    }
+                  }}
+                  disabled={
+                    awardVoteIsSubmitting ||
+                    Boolean(awardVoteExternalReference) ||
+                    awardVotePaymentStage === "success"
+                  }
+                  required
+                />
+
+                <span className="form-help">
+                  Each vote costs KSh {AWARD_VOTE_FEE}. Your current total is
+                  {" "}KSh {awardVoteTotal.toLocaleString("en-KE")}.
+                </span>
 
               </div>
 
@@ -5049,6 +5299,26 @@ export default function App() {
             a viable pathway to sustainable talent
 
             entrepreneurship.
+
+            <br />
+
+            <br />
+
+            <strong>
+
+              Face Off Agencies Kenya
+
+            </strong>{" "}
+
+            sources, trains, and places models, brand
+
+            ambassadors, and event talent across the country,
+
+            while producing the marketing and media that puts
+
+            them in front of the right audience. From casting
+
+            calls to campaign day, we run the whole show.
 
           </p>
 
