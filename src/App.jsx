@@ -5300,26 +5300,6 @@ export default function App() {
 
             entrepreneurship.
 
-            <br />
-
-            <br />
-
-            <strong>
-
-              Face Off Agencies Kenya
-
-            </strong>{" "}
-
-            sources, trains, and places models, brand
-
-            ambassadors, and event talent across the country,
-
-            while producing the marketing and media that puts
-
-            them in front of the right audience. From casting
-
-            calls to campaign day, we run the whole show.
-
           </p>
 
   

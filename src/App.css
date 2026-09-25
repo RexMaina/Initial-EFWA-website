@@ -9423,3 +9423,180 @@ nav.scrolled .logo-mark {
   }
 
 }
+
+
+/* =========================================================
+   FINAL NAV LOGO + HERO TAG OVERRIDES
+   - removes the white logo container
+   - enlarges the EFWA logo
+   - removes the decorative dash before the hero service text
+========================================================= */
+
+.logo-mark {
+  width: 86px !important;
+  height: 58px !important;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 !important;
+
+  background: transparent !important;
+
+  border: none !important;
+  border-radius: 0 !important;
+
+  box-shadow: none !important;
+
+  overflow: visible !important;
+}
+
+.logo-mark img {
+  width: 86px !important;
+  height: 58px !important;
+
+  max-width: none !important;
+  max-height: none !important;
+
+  object-fit: contain;
+  object-position: center;
+
+  border-radius: 0 !important;
+
+  background: transparent !important;
+}
+
+nav.scrolled .logo-mark {
+  width: 78px !important;
+  height: 52px !important;
+}
+
+nav.scrolled .logo-mark img {
+  width: 78px !important;
+  height: 52px !important;
+}
+
+
+/* Remove the decorative line/dash before the hero service text */
+
+.hero-tag::before {
+  content: none !important;
+  display: none !important;
+}
+
+.hero-tag {
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+  gap: 0 !important;
+}
+
+
+/* =========================================================
+   MOBILE NAV LOGO
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .logo {
+    gap: .8rem;
+  }
+
+  .logo-mark,
+  nav.scrolled .logo-mark {
+    width: 92px !important;
+    height: 62px !important;
+
+    padding: 0 !important;
+
+    background: transparent !important;
+
+    border: none !important;
+    border-radius: 0 !important;
+
+    box-shadow: none !important;
+
+    overflow: visible !important;
+  }
+
+  .logo-mark img,
+  nav.scrolled .logo-mark img {
+    width: 92px !important;
+    height: 62px !important;
+
+    max-width: none !important;
+    max-height: none !important;
+
+    object-fit: contain;
+
+    border-radius: 0 !important;
+  }
+
+  .logo-text strong {
+    font-size: 1rem;
+  }
+
+  .logo-text em {
+    font-size: .5rem;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL PHONE NAV FIT
+========================================================= */
+
+@media (max-width: 480px) {
+
+  nav {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .logo {
+    gap: .6rem;
+  }
+
+  .logo-mark,
+  nav.scrolled .logo-mark {
+    width: 88px !important;
+    height: 58px !important;
+  }
+
+  .logo-mark img,
+  nav.scrolled .logo-mark img {
+    width: 88px !important;
+    height: 58px !important;
+  }
+
+  .logo-text strong {
+    font-size: .94rem;
+  }
+
+  .logo-text em {
+    font-size: .46rem;
+    letter-spacing: .12em;
+  }
+
+}
+
+
+/* =========================================================
+   CLOSING SECTION AFTER FACE OFF PARAGRAPH REMOVAL
+   Keeps the remaining EFWA paragraph balanced.
+========================================================= */
+
+.efwa-closing-section .efwa-closing > p {
+  align-self: center;
+}
+
+@media (max-width: 900px) {
+
+  .efwa-closing-section .efwa-closing > p {
+    max-width: 680px;
+  }
+
+}
