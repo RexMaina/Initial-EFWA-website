@@ -9036,3 +9036,390 @@ nav.scrolled .logo-mark {
   }
 
 }
+
+/* =========================================================
+   EFWA CLOSING / PARTNERS SECTION
+   RESPONSIVE FIX ONLY
+========================================================= */
+
+.efwa-closing-section {
+  width: 100%;
+  overflow: hidden;
+}
+
+.efwa-closing-section .efwa-closing {
+  width: min(100%, 1280px);
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.05fr)
+    minmax(0, .95fr);
+
+  column-gap: clamp(3rem, 7vw, 8rem);
+  row-gap: 2rem;
+
+  padding:
+    clamp(5rem, 8vw, 8rem)
+    clamp(1.5rem, 5vw, 4rem);
+}
+
+
+/* ---------------------------------------------------------
+   SMALL LABEL
+--------------------------------------------------------- */
+
+.efwa-closing-section .closing-label {
+  grid-column: 1 / -1;
+
+  width: 100%;
+
+  margin: 0;
+
+  font-size: .62rem;
+  letter-spacing: .17em;
+
+  text-transform: uppercase;
+}
+
+
+/* ---------------------------------------------------------
+   LARGE HEADING
+--------------------------------------------------------- */
+
+.efwa-closing-section .efwa-closing h3 {
+  grid-column: 1;
+
+  width: 100%;
+  max-width: 620px;
+
+  margin: 0;
+
+  font-family: 'Playfair Display', serif;
+
+  font-size:
+    clamp(
+      3.5rem,
+      6vw,
+      6.8rem
+    );
+
+  font-weight: 900;
+
+  line-height: .91;
+
+  letter-spacing: -.045em;
+}
+
+
+/* ---------------------------------------------------------
+   DESCRIPTION
+--------------------------------------------------------- */
+
+.efwa-closing-section .efwa-closing > p {
+  grid-column: 2;
+
+  align-self: center;
+
+  width: 100%;
+  max-width: 520px;
+
+  margin: 0;
+
+  font-size: .86rem;
+
+  line-height: 1.8;
+}
+
+
+/* ---------------------------------------------------------
+   LOCATION / EXTRA CONTENT
+--------------------------------------------------------- */
+
+.efwa-closing-section .closing-location {
+  grid-column: 1 / -1;
+
+  width: 100%;
+}
+
+
+/* =========================================================
+   PARTNERS AREA
+========================================================= */
+
+.efwa-closing-section .efwa-partners {
+  grid-column: 1 / -1;
+
+  width: 100%;
+
+  margin-top: 2.5rem;
+
+  padding-top: 2.5rem;
+
+  border-top:
+    1px solid
+    rgba(255, 255, 255, .08);
+}
+
+
+.efwa-closing-section .partners-logo-row {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  align-items: center;
+
+  justify-items: center;
+
+  gap: 2rem;
+
+  margin-top: 1.8rem;
+}
+
+
+.efwa-closing-section .partner-logo-card {
+  width: 110px;
+  height: 110px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+
+
+.efwa-closing-section .partner-logo-card img {
+  display: block;
+
+  width: 90px;
+  height: 90px;
+
+  max-width: 90px;
+  max-height: 90px;
+
+  object-fit: contain;
+
+  border-radius: 50%;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .efwa-closing-section .efwa-closing {
+    grid-template-columns: 1fr;
+
+    width: 100%;
+
+    padding:
+      4.5rem
+      1.8rem;
+
+    column-gap: 0;
+
+    row-gap: 1.8rem;
+  }
+
+
+  .efwa-closing-section .closing-label,
+  .efwa-closing-section .efwa-closing h3,
+  .efwa-closing-section .efwa-closing > p,
+  .efwa-closing-section .closing-location,
+  .efwa-closing-section .efwa-partners {
+    grid-column: 1;
+  }
+
+
+  .efwa-closing-section .efwa-closing h3 {
+    width: 100%;
+
+    max-width: 700px;
+
+    font-size:
+      clamp(
+        3rem,
+        9vw,
+        5rem
+      );
+
+    line-height: .94;
+  }
+
+
+  .efwa-closing-section .efwa-closing > p {
+    width: 100%;
+
+    max-width: 650px;
+
+    padding: 0;
+
+    font-size: .86rem;
+
+    line-height: 1.8;
+  }
+
+
+  .efwa-closing-section .efwa-partners {
+    margin-top: 1.5rem;
+  }
+
+
+  .efwa-closing-section .partners-logo-row {
+    grid-template-columns:
+      repeat(
+        4,
+        minmax(0, 1fr)
+      );
+
+    gap: 1.5rem;
+  }
+
+
+  .efwa-closing-section .partner-logo-card {
+    width: 90px;
+    height: 90px;
+  }
+
+
+  .efwa-closing-section .partner-logo-card img {
+    width: 72px;
+    height: 72px;
+
+    max-width: 72px;
+    max-height: 72px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .efwa-closing-section .efwa-closing {
+    padding:
+      3.8rem
+      1.25rem;
+
+    row-gap: 1.5rem;
+  }
+
+
+  .efwa-closing-section .closing-label {
+    font-size: .56rem;
+
+    letter-spacing: .14em;
+  }
+
+
+  .efwa-closing-section .efwa-closing h3 {
+    max-width: 100%;
+
+    font-size:
+      clamp(
+        2.65rem,
+        13vw,
+        4rem
+      );
+
+    line-height: .91;
+
+    letter-spacing: -.04em;
+
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
+
+  .efwa-closing-section .efwa-closing > p {
+    max-width: 100%;
+
+    font-size: .8rem;
+
+    line-height: 1.75;
+  }
+
+
+  .efwa-closing-section .efwa-partners {
+    width: 100%;
+
+    margin-top: 1.2rem;
+
+    padding-top: 2rem;
+  }
+
+
+  .efwa-closing-section .partners-logo-row {
+    width: 100%;
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    gap:
+      1.6rem
+      1rem;
+  }
+
+
+  .efwa-closing-section .partner-logo-card {
+    width: 100%;
+
+    height: 90px;
+  }
+
+
+  .efwa-closing-section .partner-logo-card img {
+    width: 74px;
+    height: 74px;
+
+    max-width: 74px;
+    max-height: 74px;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 380px) {
+
+  .efwa-closing-section .efwa-closing {
+    padding:
+      3.2rem
+      1rem;
+  }
+
+
+  .efwa-closing-section .efwa-closing h3 {
+    font-size: 2.45rem;
+  }
+
+
+  .efwa-closing-section .partners-logo-row {
+    gap: 1.2rem .75rem;
+  }
+
+
+  .efwa-closing-section .partner-logo-card img {
+    width: 66px;
+    height: 66px;
+
+    max-width: 66px;
+    max-height: 66px;
+  }
+
+}
