@@ -3,7 +3,7 @@ import "./App.css";
 import { supabase } from "./lib/supabaseClient";
 import logo from "./assets/logo.jpeg";
 import efwaLogo from "./assets/efwa-logo.jpeg";
-import imager from "./assets/imager.png";
+import imager from "./assets/imager.jpeg";
 import image1 from "./assets/image1.jpeg";
 import image2 from "./assets/image2.jpg";
 import image3 from "./assets/image3.jpg";
@@ -20,6 +20,30 @@ import imageB from "./assets/imageb.jpeg";
 import imageC from "./assets/imagec.jpeg";
 import imageD from "./assets/imaged.png";
 import image4 from "./assets/image4.jpg";
+
+/* Award contestant photos */
+import mrMeruPhoto from "./assets/Chacha Geofffery Mr Meru University.jpeg";
+import missEmbuPhoto from "./assets/Lorna Nyambura Ndegwa Miss University of Embu.jpeg";
+import missKaratinaPhoto from "./assets/Miss Karatina University - Copy.jpeg";
+import mrKaratinaPhoto from "./assets/LUKAS NYALE Mr KARATINA UNIVERSITY.jpeg";
+import mrKirinyagaPhoto from "./assets/Mr Kirinyaga University.jpeg";
+import mrEmbuPhoto from "./assets/MANYURA EMMANUEL PASAKA Mr University of Embu.jpeg";
+import mrChukaPhoto from "./assets/Frank Nzonzo Mr Chuka University.jpeg";
+import mrDedanKimathiPhoto from "./assets/Morrison Maina Njagi Mr Dedan Kimathi University.jpeg";
+import missKirinyagaPhoto from "./assets/Thelma Odaba Miss Kirinyaga University.jpeg";
+import missDedanKimathiPhoto from "./assets/Nicole kahendi Miss Dedan Kimathi University.jpeg";
+import missMeruPhoto from "./assets/Miss Meru University.jpeg";
+import missChukaPhoto from "./assets/Miss Chuka Uni Miva Ayo.jpeg";
+
+/* Fashion Enthusiast Leader nominee photos */
+import kenjavaPhoto from "./assets/Hon. Kenjava Wakagoto Mwaniki.jpeg";
+import johnMukunjiPhoto from "./assets/Hon. John Gitonga Mukunji Mp Manyatta.jpeg";
+import alexNgoroPhoto from "./assets/Hon. Alex Ngoro.jpeg";
+import royLeftiePhoto from "./assets/Hon. Roy Mutembei Leftie.jpeg";
+import billyMwangiPhoto from "./assets/Hon. Billy Mwangi.jpeg";
+import leoMuthendePhoto from "./assets/Hon. Leo Wa Muthende Mp Mbeere North.jpeg";
+import njeriMainaPhoto from "./assets/Hon. Njeri Maina Women Rep Kirinyaga County.jpeg";
+import ashleyMurugiPhoto from "./assets/Ashley Murugi.jpeg";
 
 const initialFormData = {
 
@@ -68,6 +92,122 @@ const initialExhibitorFormData = {
 };
 
 const AWARD_VOTE_FEE = 10;
+
+/* =========================================================
+   AWARD CONTESTANT PHOTOS
+
+   Supabase remains the source of contestant names and vote
+   totals. This map only attaches local photos to contestants.
+========================================================= */
+
+const AWARD_CONTESTANT_PHOTOS_BY_SLUG = {
+  "mr-university-of-embu-2026": mrEmbuPhoto,
+  "mr-chuka-university-2026": mrChukaPhoto,
+  "mr-karatina-university-2026": mrKaratinaPhoto,
+  "mr-meru-university-of-science-and-technology": mrMeruPhoto,
+  "mr-dedan-kimathi-university-of-technology-2026": mrDedanKimathiPhoto,
+  "mr-kirinyaga-university-2026": mrKirinyagaPhoto,
+  "miss-university-of-embu-2026": missEmbuPhoto,
+  "miss-chuka-university-2026": missChukaPhoto,
+  "miss-karatina-university-2026": missKaratinaPhoto,
+  "miss-dedan-kimathi-university-of-technology-2026": missDedanKimathiPhoto,
+  "miss-kirinyaga-university-2026": missKirinyagaPhoto,
+  "miss-meru-university-of-science-and-technology": missMeruPhoto,
+  "miss-meru-university-of-science-and-technology-2026": missMeruPhoto,
+  "miss-meru-university-2026": missMeruPhoto,
+};
+
+const normalizeContestantName = (value) =>
+  String(value || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+
+const AWARD_CONTESTANT_PHOTOS_BY_NAME = {
+  "mr university of embu 2026": mrEmbuPhoto,
+  "manyura emmanuel pasaka mr university of embu": mrEmbuPhoto,
+
+  "mr chuka university 2026": mrChukaPhoto,
+  "frank nzonzo mr chuka university": mrChukaPhoto,
+
+  "mr karatina university 2026": mrKaratinaPhoto,
+  "mr karatina university": mrKaratinaPhoto,
+  "lukas nyale mr karatina university": mrKaratinaPhoto,
+
+  "mr meru university of science and technology": mrMeruPhoto,
+  "chacha geofffery mr meru university": mrMeruPhoto,
+
+  "mr dedan kimathi university of technology 2026": mrDedanKimathiPhoto,
+  "morrison maina njagi mr dedan kimathi university": mrDedanKimathiPhoto,
+
+  "mr kirinyaga university 2026": mrKirinyagaPhoto,
+  "mr kirinyaga university": mrKirinyagaPhoto,
+
+  "miss university of embu 2026": missEmbuPhoto,
+  "lorna nyambura ndegwa miss university of embu": missEmbuPhoto,
+
+  "miss chuka university 2026": missChukaPhoto,
+  "miss chuka uni miva ayo": missChukaPhoto,
+
+  "miss karatina university 2026": missKaratinaPhoto,
+  "miss karatina university": missKaratinaPhoto,
+
+  "miss dedan kimathi university of technology 2026": missDedanKimathiPhoto,
+  "nicole kahendi miss dedan kimathi university": missDedanKimathiPhoto,
+
+  "miss kirinyaga university 2026": missKirinyagaPhoto,
+  "miss kirinyaga university": missKirinyagaPhoto,
+  "thelma odaba miss kirinyaga university": missKirinyagaPhoto,
+
+  "miss meru university of science and technology": missMeruPhoto,
+  "miss meru university of science and technology 2026": missMeruPhoto,
+  "miss meru university": missMeruPhoto,
+};
+
+function getAwardContestantPhoto(contestant) {
+  const slug = String(contestant?.contestant_slug || "").trim();
+
+  if (slug && AWARD_CONTESTANT_PHOTOS_BY_SLUG[slug]) {
+    return AWARD_CONTESTANT_PHOTOS_BY_SLUG[slug];
+  }
+
+  const normalizedName = normalizeContestantName(
+    contestant?.contestant_name
+  );
+
+  return AWARD_CONTESTANT_PHOTOS_BY_NAME[normalizedName] || null;
+}
+
+function getContestantInitials(name) {
+  const words = String(name || "")
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean);
+
+  return words
+    .slice(0, 2)
+    .map((word) => word.charAt(0).toUpperCase())
+    .join("");
+}
+
+/* =========================================================
+   FASHION ENTHUSIAST LEADER PHOTOS
+========================================================= */
+
+const FASHION_LEADER_PHOTOS_BY_SLUG = {
+   "hon-njeri-maina-women-rep-kirinyaga-county": njeriMainaPhoto,
+  "hon-kenjava-wakagoto-mwaniki": kenjavaPhoto,
+  "hon-john-gitonga-mukunji-mp-manyatta": johnMukunjiPhoto,
+  "hon-alex-ngoro": alexNgoroPhoto,
+  "hon-roy-mutembei-leftie": royLeftiePhoto,
+  "hon-billy-mwangi": billyMwangiPhoto,
+  "hon-leo-wa-muthende-mp-mbeere-north": leoMuthendePhoto,
+  "ashley-murugi": ashleyMurugiPhoto,
+};
+
+function getFashionLeaderPhoto(nominee) {
+  return FASHION_LEADER_PHOTOS_BY_SLUG[nominee?.nominee_slug] || null;
+}
 
 const EXHIBITOR_FEE = 5000;
 
@@ -273,6 +413,14 @@ export default function App() {
 
   const [awardVotePaymentMessage, setAwardVotePaymentMessage] = useState("");
 
+  /* Fashion Enthusiast Leader free voting */
+  const [fashionLeaderNominees, setFashionLeaderNominees] = useState([]);
+  const [selectedFashionLeaderNominee, setSelectedFashionLeaderNominee] = useState("");
+  const [fashionLeaderEmail, setFashionLeaderEmail] = useState("");
+  const [fashionLeaderOtp, setFashionLeaderOtp] = useState("");
+  const [fashionLeaderStage, setFashionLeaderStage] = useState("idle");
+  const [fashionLeaderMessage, setFashionLeaderMessage] = useState("");
+
   const maleAwardContestants = awardContestants.filter(
     (contestant) => contestant.award_category === "male_model_of_the_year"
   );
@@ -282,6 +430,48 @@ export default function App() {
   );
 
   const awardVoteTotal = AWARD_VOTE_FEE * Number(awardVoteQuantity || 0);
+
+  /* =========================================================
+     FASHION ENTHUSIAST LEADER — MANUAL DISPLAY ORDER
+
+     Desktop CSS fills:
+     positions 1–4 down the LEFT column
+     positions 5–8 down the RIGHT column
+
+     To rearrange nominees later, only change the slug order
+     inside fashionLeaderDisplayOrder.
+  ========================================================= */
+
+  const fashionLeaderDisplayOrder = [
+    "hon-kenjava-wakagoto-mwaniki",
+    "hon-njeri-maina-women-rep-kirinyaga-county",
+    "hon-alex-ngoro",
+    "ashley-murugi",
+
+    "hon-billy-mwangi",
+    "hon-john-gitonga-mukunji-mp-manyatta",
+    "hon-leo-wa-muthende-mp-mbeere-north",
+    "hon-roy-mutembei-leftie",
+  ];
+
+  const orderedFashionLeaderNominees = [...fashionLeaderNominees].sort(
+    (a, b) => {
+      const aIndex = fashionLeaderDisplayOrder.indexOf(a.nominee_slug);
+      const bIndex = fashionLeaderDisplayOrder.indexOf(b.nominee_slug);
+
+      const aPosition =
+        aIndex === -1 ? Number.MAX_SAFE_INTEGER : aIndex;
+
+      const bPosition =
+        bIndex === -1 ? Number.MAX_SAFE_INTEGER : bIndex;
+
+      if (aPosition !== bPosition) {
+        return aPosition - bPosition;
+      }
+
+      return Number(a.display_order || 0) - Number(b.display_order || 0);
+    }
+  );
 
   /* =========================================================
 
@@ -397,6 +587,34 @@ export default function App() {
 
     };
 
+  }, []);
+
+  /* =========================================================
+     LOAD FASHION ENTHUSIAST LEADER NOMINEES
+  ========================================================= */
+
+  const loadFashionLeaderNominees = async () => {
+    const { data, error } = await supabase
+      .from("fashion_leader_nominees")
+      .select(
+        "id,nominee_name,nominee_slug,gender,display_order,vote_count,is_active"
+      )
+      .eq("is_active", true)
+      .order("display_order", { ascending: true });
+
+    if (error) {
+      console.error("Unable to load Fashion Enthusiast Leader nominees:", error);
+      setFashionLeaderMessage(
+        "We could not load the Fashion Enthusiast Leader nominees. Please refresh the page."
+      );
+      return;
+    }
+
+    setFashionLeaderNominees(data || []);
+  };
+
+  useEffect(() => {
+    loadFashionLeaderNominees();
   }, []);
 
   /* =========================================================
@@ -2245,6 +2463,202 @@ export default function App() {
     return `Send M-Pesa Prompt · KSh ${awardVoteTotal.toLocaleString("en-KE")}`;
 
   })();
+
+  /* =========================================================
+     FASHION ENTHUSIAST LEADER — VERIFIED EMAIL VOTING
+  ========================================================= */
+
+  const sendFashionLeaderOtp = async () => {
+    if (!selectedFashionLeaderNominee) {
+      setFashionLeaderMessage("Please select one nominee first.");
+      return;
+    }
+
+    const email = fashionLeaderEmail.trim().toLowerCase();
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setFashionLeaderMessage("Enter a valid email address.");
+      return;
+    }
+
+    /*
+     * Check the server BEFORE sending an OTP.
+     *
+     * This prevents unnecessary verification emails when the same email
+     * has already cast a Fashion Enthusiast Leader vote within the
+     * rolling 24-hour window.
+     *
+     * IMPORTANT: this is only a pre-check for user experience.
+     * The final cast-fashion-leader-vote Edge Function still enforces
+     * the 24-hour restriction again after email verification.
+     */
+    setFashionLeaderStage("checking_eligibility");
+    setFashionLeaderMessage("Checking whether this email is eligible to vote...");
+
+    try {
+      const { data: eligibility, error: eligibilityError } =
+        await supabase.functions.invoke(
+          "check-fashion-leader-eligibility",
+          {
+            body: { email },
+          }
+        );
+
+      if (eligibilityError) {
+        const message = await readFunctionError(
+          eligibilityError,
+          "We could not check voting eligibility. Please try again."
+        );
+
+        throw new Error(message);
+      }
+
+      if (eligibility?.eligible === false) {
+        const nextVote = eligibility?.nextEligibleAt
+          ? new Date(eligibility.nextEligibleAt).toLocaleString("en-KE", {
+              dateStyle: "medium",
+              timeStyle: "short",
+            })
+          : null;
+
+        setFashionLeaderStage("blocked");
+        setFashionLeaderOtp("");
+
+        setFashionLeaderMessage(
+          nextVote
+            ? `This email has already voted within the last 24 hours. A new verification code will not be sent. You can vote again after ${nextVote}.`
+            : "This email has already voted within the last 24 hours. A new verification code will not be sent yet."
+        );
+
+        return;
+      }
+
+      setFashionLeaderStage("sending");
+      setFashionLeaderMessage("Sending a verification code to your email...");
+
+      const { error } = await supabase.auth.signInWithOtp({
+        email,
+        options: {
+          shouldCreateUser: true,
+        },
+      });
+
+      if (error) {
+        throw new Error(
+          error.message ||
+            "We could not send the verification code. Please try again."
+        );
+      }
+
+      setFashionLeaderEmail(email);
+      setFashionLeaderOtp("");
+      setFashionLeaderStage("code_sent");
+      setFashionLeaderMessage(
+        "Verification code sent. Check your email, enter the code below, then confirm your vote."
+      );
+    } catch (error) {
+      console.error("Fashion leader OTP eligibility/send error:", error);
+      setFashionLeaderStage("idle");
+      setFashionLeaderMessage(
+        error?.message ||
+          "We could not check eligibility or send the verification code. Please try again."
+      );
+    }
+  };
+
+  const verifyAndCastFashionLeaderVote = async () => {
+    if (!selectedFashionLeaderNominee) {
+      setFashionLeaderMessage("Please select one nominee first.");
+      return;
+    }
+
+    const email = fashionLeaderEmail.trim().toLowerCase();
+    const token = fashionLeaderOtp.trim().replace(/\s/g, "");
+
+    if (!email || !token) {
+      setFashionLeaderMessage("Enter the verification code sent to your email.");
+      return;
+    }
+
+    setFashionLeaderStage("verifying");
+    setFashionLeaderMessage("Verifying your email and securely recording your vote...");
+
+    try {
+      const { data: verificationData, error: verificationError } =
+        await supabase.auth.verifyOtp({
+          email,
+          token,
+          type: "email",
+        });
+
+      if (verificationError || !verificationData?.session?.access_token) {
+        throw new Error(
+          verificationError?.message ||
+            "The verification code is invalid or has expired."
+        );
+      }
+
+      setFashionLeaderStage("voting");
+
+      const { data, error } = await supabase.functions.invoke(
+        "cast-fashion-leader-vote",
+        {
+          body: {
+            nomineeId: selectedFashionLeaderNominee,
+          },
+          headers: {
+            Authorization: `Bearer ${verificationData.session.access_token}`,
+          },
+        }
+      );
+
+      if (error) {
+        const message = await readFunctionError(
+          error,
+          "We could not record your vote."
+        );
+        throw new Error(message);
+      }
+
+      if (!data?.success) {
+        const nextVote = data?.nextEligibleAt
+          ? new Date(data.nextEligibleAt).toLocaleString("en-KE", {
+              dateStyle: "medium",
+              timeStyle: "short",
+            })
+          : null;
+
+        setFashionLeaderStage("blocked");
+        setFashionLeaderMessage(
+          nextVote
+            ? `You have already voted within the last 24 hours. You can vote again after ${nextVote}.`
+            : data?.message || "You have already voted within the last 24 hours."
+        );
+
+        await supabase.auth.signOut();
+        return;
+      }
+
+      await loadFashionLeaderNominees();
+
+      setFashionLeaderStage("success");
+      setFashionLeaderMessage(
+        `Your verified vote for ${
+          data?.nominee?.nominee_name || "the selected nominee"
+        } has been counted. You can vote again after 24 hours.`
+      );
+      setFashionLeaderOtp("");
+
+      // Require fresh email verification for every future voting attempt.
+      await supabase.auth.signOut();
+    } catch (error) {
+      console.error("Fashion Enthusiast Leader voting error:", error);
+      setFashionLeaderStage("code_sent");
+      setFashionLeaderMessage(
+        error?.message || "We could not verify or record your vote. Please try again."
+      );
+    }
+  };
 
   return (
 
@@ -4790,6 +5204,7 @@ export default function App() {
               <div className="award-contestants">
                 {maleAwardContestants.map((contestant) => {
                   const selected = selectedMaleContestant === contestant.id;
+                  const contestantPhoto = getAwardContestantPhoto(contestant);
 
                   return (
                     <button
@@ -4806,8 +5221,26 @@ export default function App() {
                         {selected ? "✓" : ""}
                       </span>
 
-                      <span className="award-contestant-name">
-                        {contestant.contestant_name}
+                      <span className="award-contestant-profile">
+                        {contestantPhoto ? (
+                          <img
+                            src={contestantPhoto}
+                            alt={contestant.contestant_name}
+                            className="award-contestant-photo"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <span
+                            className="award-contestant-photo award-contestant-photo-fallback"
+                            aria-hidden="true"
+                          >
+                            {getContestantInitials(contestant.contestant_name)}
+                          </span>
+                        )}
+
+                        <span className="award-contestant-name">
+                          {contestant.contestant_name}
+                        </span>
                       </span>
 
                       <span className="award-contestant-votes">
@@ -4850,6 +5283,7 @@ export default function App() {
               <div className="award-contestants">
                 {femaleAwardContestants.map((contestant) => {
                   const selected = selectedFemaleContestant === contestant.id;
+                  const contestantPhoto = getAwardContestantPhoto(contestant);
 
                   return (
                     <button
@@ -4866,8 +5300,26 @@ export default function App() {
                         {selected ? "✓" : ""}
                       </span>
 
-                      <span className="award-contestant-name">
-                        {contestant.contestant_name}
+                      <span className="award-contestant-profile">
+                        {contestantPhoto ? (
+                          <img
+                            src={contestantPhoto}
+                            alt={contestant.contestant_name}
+                            className="award-contestant-photo"
+                            loading="lazy"
+                          />
+                        ) : (
+                          <span
+                            className="award-contestant-photo award-contestant-photo-fallback"
+                            aria-hidden="true"
+                          >
+                            {getContestantInitials(contestant.contestant_name)}
+                          </span>
+                        )}
+
+                        <span className="award-contestant-name">
+                          {contestant.contestant_name}
+                        </span>
                       </span>
 
                       <span className="award-contestant-votes">
@@ -4896,6 +5348,211 @@ export default function App() {
             {awardVoteMessage}
           </p>
         )}
+
+      </section>
+
+      {/* =====================================================
+
+          FASHION ENTHUSIAST LEADER — FREE VERIFIED VOTING
+
+      ====================================================== */}
+
+      <section
+        className="fashion-leader-voting-section"
+        id="fashion-leader-voting"
+      >
+        <div className="fashion-leader-heading reveal">
+          <div className="fashion-leader-heading-copy">
+            <span className="fashion-leader-kicker">
+              Embu Fashion Awards 2026 · Fashion Leadership
+            </span>
+
+            <h2>
+              Fashion Enthusiast
+              <br />
+              Leader 2026
+            </h2>
+
+            <p>
+              Select one nominee and verify your email to cast one free vote.
+              Each verified email can cast only one vote within any 24-hour
+              period across this award.
+            </p>
+          </div>
+
+          <div className="fashion-leader-trophy">
+            <img
+              src={imageM}
+              alt="Embu Fashion Awards Fashion Enthusiast Leader 2026 trophy"
+            />
+          </div>
+        </div>
+
+        <div className="fashion-leader-groups reveal">
+          <div className="fashion-leader-group">
+            <div className="fashion-leader-nominee-grid">
+              {orderedFashionLeaderNominees.map((nominee) => {
+                const selected =
+                  selectedFashionLeaderNominee === nominee.id;
+                const photo = getFashionLeaderPhoto(nominee);
+
+                return (
+                  <button
+                    key={nominee.id}
+                    type="button"
+                    className={`fashion-leader-nominee-card ${
+                      selected ? "selected" : ""
+                    }`}
+                    onClick={() => {
+                      setSelectedFashionLeaderNominee(nominee.id);
+                      setFashionLeaderMessage("");
+                    }}
+                    aria-pressed={selected}
+                  >
+                    <span className="fashion-leader-photo-wrap">
+                      {photo ? (
+                        <img
+                          src={photo}
+                          alt={nominee.nominee_name}
+                          className="fashion-leader-photo"
+                          loading="lazy"
+                        />
+                      ) : (
+                        <span className="fashion-leader-photo fashion-leader-photo-fallback">
+                          {getContestantInitials(nominee.nominee_name)}
+                        </span>
+                      )}
+                    </span>
+
+                    <span className="fashion-leader-nominee-info">
+                      <strong>{nominee.nominee_name}</strong>
+                      <span>{nominee.vote_count || 0} votes</span>
+                    </span>
+
+                    <span
+                      className="fashion-leader-select-mark"
+                      aria-hidden="true"
+                    >
+                      {selected ? "✓" : ""}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        <div className="fashion-leader-verify-card reveal">
+          <div className="fashion-leader-verify-copy">
+            <span>Email Verification</span>
+            <h3>Confirm Your Free Vote</h3>
+            <p>
+              Your vote is counted only after the email verification code is
+              confirmed.
+            </p>
+          </div>
+
+          <div className="fashion-leader-verify-form">
+            <label htmlFor="fashion-leader-email">Email address</label>
+            <input
+              id="fashion-leader-email"
+              type="email"
+              value={fashionLeaderEmail}
+              onChange={(event) => setFashionLeaderEmail(event.target.value)}
+              placeholder="you@example.com"
+              autoComplete="email"
+              disabled={[
+                "checking_eligibility",
+                "sending",
+                "verifying",
+                "voting",
+              ].includes(fashionLeaderStage)}
+            />
+
+            {fashionLeaderStage !== "code_sent" &&
+            fashionLeaderStage !== "verifying" &&
+            fashionLeaderStage !== "voting" ? (
+              <button
+                type="button"
+                className="btn-p fashion-leader-action"
+                onClick={sendFashionLeaderOtp}
+                disabled={
+                  !selectedFashionLeaderNominee ||
+                  ["checking_eligibility", "sending"].includes(
+                    fashionLeaderStage
+                  )
+                }
+              >
+                {fashionLeaderStage === "checking_eligibility"
+                  ? "Checking Eligibility..."
+                  : fashionLeaderStage === "sending"
+                  ? "Sending Verification Code..."
+                  : "Send Verification Code"}
+              </button>
+            ) : (
+              <>
+                <label htmlFor="fashion-leader-otp">
+                  Verification code
+                </label>
+                <input
+                  id="fashion-leader-otp"
+                  type="text"
+                  inputMode="numeric"
+                  value={fashionLeaderOtp}
+                  onChange={(event) => setFashionLeaderOtp(event.target.value)}
+                  placeholder="Enter the code from your email"
+                  autoComplete="one-time-code"
+                  maxLength={8}
+                  disabled={["verifying", "voting"].includes(
+                    fashionLeaderStage
+                  )}
+                />
+
+                <div className="fashion-leader-verify-actions">
+                  <button
+                    type="button"
+                    className="btn-p fashion-leader-action"
+                    onClick={verifyAndCastFashionLeaderVote}
+                    disabled={
+                      !fashionLeaderOtp.trim() ||
+                      ["verifying", "voting"].includes(fashionLeaderStage)
+                    }
+                  >
+                    {fashionLeaderStage === "verifying" ||
+                    fashionLeaderStage === "voting"
+                      ? "Confirming Vote..."
+                      : "Verify & Cast 1 Vote"}
+                  </button>
+
+                  <button
+                    type="button"
+                    className="fashion-leader-resend"
+                    onClick={sendFashionLeaderOtp}
+                    disabled={[
+                      "checking_eligibility",
+                      "sending",
+                      "verifying",
+                      "voting",
+                    ].includes(fashionLeaderStage)}
+                  >
+                    Resend Code
+                  </button>
+                </div>
+              </>
+            )}
+
+            {fashionLeaderMessage && (
+              <p
+                className={`fashion-leader-message ${
+                  fashionLeaderStage === "success" ? "success" : ""
+                }`}
+                role="status"
+              >
+                {fashionLeaderMessage}
+              </p>
+            )}
+          </div>
+        </div>
       </section>
 
       {/* =====================================================
@@ -4977,33 +5634,6 @@ export default function App() {
                 Celebrating photographers whose work captures fashion,
                 people, culture, events, and creative expression with
                 originality and impact.
-              </p>
-            </div>
-          </article>
-
-          <article className="special-award-card">
-            <div className="special-award-image">
-              <img
-                src={imageN}
-                alt="Embu Fashion Awards Fashion Enthusiast Leader 2026 trophy"
-              />
-            </div>
-
-            <div className="special-award-content">
-              <span className="special-award-label">
-                Fashion Leadership
-              </span>
-
-              <h3>
-                Fashion Enthusiast
-                <br />
-                Leader 2026
-              </h3>
-
-              <p>
-                Recognising a passionate fashion advocate whose leadership,
-                visibility, and support continue to create opportunities
-                within the creative community.
               </p>
             </div>
           </article>
@@ -5300,8 +5930,18 @@ export default function App() {
 
             entrepreneurship.
 
-          </p>
+         <br />
+         <br />
 
+            <strong>
+              Face Off Agencies Kenya
+            </strong>{" "}
+            (FACE OFF AGENCIES KE Business Registration No.
+            BN-B8S6VA6L) is a Nairobi-based staffing, talent management, events, 
+            and digital marketing company. We provide professional protocol and event staffing, 
+            brand ambassadors, talent management, digital marketing, media production, and event management solutions.
+            We help brands and organizations deliver exceptional experiences, engage audiences, and strengthen their brand presence through skilled personnel and creative solutions.
+          </p>    
   
 
           <div className="efwa-partners">
@@ -5404,25 +6044,78 @@ export default function App() {
 
         </p>
 
-        <ul className="f-links">
+        <div className="f-social">
+          <span className="f-social-label">
+            Follow Face Off Agencies Kenya
+          </span>
 
-          <li>
+          <p className="f-social-copy">
+            Follow our official social media pages for contestant updates,
+            event highlights, fashion content, and Embu Fashion Awards news.
+          </p>
 
+          <ul className="f-links f-social-links">
+            <li>
+              <a
+                href="https://youtube.com/@faceoffagencieskenya?si=aYqM71Y-xpjcGzDG"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="f-social-link"
+                aria-label="Face Off Agencies Kenya on YouTube"
+                title="YouTube"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M2.5 17a24.1 24.1 0 0 1 0-10 2 2 0 0 1 1.4-1.4c4.1-.6 12.1-.6 16.2 0A2 2 0 0 1 21.5 7a24.1 24.1 0 0 1 0 10 2 2 0 0 1-1.4 1.4c-4.1.6-12.1.6-16.2 0A2 2 0 0 1 2.5 17Z" />
+                  <path d="m10 15 5-3-5-3v6Z" />
+                </svg>
+              </a>
+            </li>
 
-          </li>
+            <li>
+              <a
+                href="https://www.facebook.com/share/1HfZ2n5pU9/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="f-social-link"
+                aria-label="Face Off Agencies Kenya on Facebook"
+                title="Facebook"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3.5l.5-4h-4V7a1 1 0 0 1 1-1h3V2Z" />
+                </svg>
+              </a>
+            </li>
 
-          <li>
-
-
-          </li>
-
-          <li>
-
-
-
-          </li>
-
-        </ul>
+            <li>
+              <a
+                href="https://www.instagram.com/face_off.agencieske?stkn=OG0yZHh0d3h6d3M5"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="f-social-link"
+                aria-label="Face Off Agencies Kenya on Instagram"
+                title="Instagram"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <rect x="3" y="3" width="18" height="18" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="17.5" cy="6.5" r="1" className="f-social-dot" />
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
 
       </footer>
 
@@ -5431,3 +6124,4 @@ export default function App() {
   );
 
 }
+

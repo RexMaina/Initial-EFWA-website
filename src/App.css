@@ -9600,3 +9600,1418 @@ nav.scrolled .logo-mark img {
   }
 
 }
+
+/* =========================================================
+   AWARD CONTESTANT PHOTOS
+========================================================= */
+
+.award-contestant-profile {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: .85rem;
+
+  text-align: left;
+}
+
+
+.award-contestant-photo {
+  width: 58px;
+  height: 58px;
+
+  flex: 0 0 58px;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center top;
+
+  border-radius: 14px;
+
+  border:
+    1px solid
+    rgba(16, 16, 20, .10);
+
+  background: #f4f4f6;
+
+  box-shadow:
+    0 5px 16px
+    rgba(16, 16, 20, .08);
+
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    border-color .25s ease;
+}
+
+
+.award-contestant:hover
+.award-contestant-photo,
+.award-contestant.selected
+.award-contestant-photo {
+  transform: scale(1.04);
+
+  border-color:
+    rgba(230, 50, 98, .35);
+
+  box-shadow:
+    0 8px 22px
+    rgba(16, 16, 20, .12);
+}
+
+
+.award-contestant-photo-fallback {
+  align-items: center;
+  justify-content: center;
+
+  font-family: 'Playfair Display', serif;
+
+  font-size: 1rem;
+  font-weight: 900;
+
+  color: var(--accent);
+
+  background:
+    linear-gradient(
+      145deg,
+      #fff,
+      #f5f2f3
+    );
+}
+
+
+.award-contestant-profile
+.award-contestant-name {
+  min-width: 0;
+
+  display: block;
+
+  font-weight: 600;
+
+  line-height: 1.35;
+}
+
+
+/* =========================================================
+   SOCIAL MEDIA BELOW MODEL AWARDS
+========================================================= */
+
+.awards-social-follow {
+  width: min(100%, 820px);
+
+  margin:
+    clamp(3rem, 5vw, 5rem)
+    auto
+    0;
+
+  padding-top:
+    clamp(2rem, 4vw, 3rem);
+
+  text-align: center;
+
+  border-top:
+    1px solid
+    rgba(16, 16, 20, .10);
+}
+
+
+.awards-social-kicker {
+  display: block;
+
+  margin-bottom: .8rem;
+
+  font-family: 'DM Mono', monospace;
+
+  font-size: .62rem;
+  font-weight: 500;
+
+  letter-spacing: .15em;
+
+  text-transform: uppercase;
+
+  color: var(--accent);
+}
+
+
+.awards-social-follow > p {
+  width: min(100%, 600px);
+
+  margin:
+    0 auto
+    1.6rem;
+
+  font-size: .84rem;
+
+  line-height: 1.7;
+
+  color: var(--muted);
+}
+
+
+.awards-social-links {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+  gap: .8rem;
+}
+
+
+.awards-social-links a {
+  min-width: 130px;
+  min-height: 46px;
+
+  padding:
+    .75rem
+    1.3rem;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: .5rem;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius: 999px;
+
+  background: #fff;
+
+  color: var(--ink);
+
+  text-decoration: none;
+
+  font-size: .78rem;
+  font-weight: 600;
+
+  transition:
+    transform .2s ease,
+    border-color .2s ease,
+    color .2s ease,
+    box-shadow .2s ease;
+}
+
+
+.awards-social-links a:hover {
+  transform: translateY(-2px);
+
+  border-color: var(--accent);
+
+  color: var(--accent);
+
+  box-shadow:
+    0 8px 20px
+    rgba(16, 16, 20, .08);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .award-contestant-profile {
+    gap: .65rem;
+  }
+
+
+  .award-contestant-photo {
+    width: 50px;
+    height: 50px;
+
+    flex-basis: 50px;
+
+    border-radius: 12px;
+  }
+
+
+  .award-contestant-profile
+  .award-contestant-name {
+    font-size: .78rem;
+  }
+
+
+  .awards-social-follow {
+    margin-top: 3rem;
+  }
+
+
+  .awards-social-links {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    width: 100%;
+  }
+
+
+  .awards-social-links a {
+    width: 100%;
+  }
+
+}
+/* =========================================================
+   FOOTER SOCIAL MEDIA
+========================================================= */
+
+.f-social {
+  max-width: 420px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  gap: .55rem;
+}
+
+
+.f-social-label {
+  font-family: 'DM Mono', monospace;
+
+  font-size: .62rem;
+  font-weight: 500;
+
+  line-height: 1.4;
+
+  text-transform: uppercase;
+
+  letter-spacing: .15em;
+
+  color: var(--accent);
+}
+
+
+.f-social-copy {
+  max-width: 390px;
+
+  margin: 0;
+
+  font-size: .74rem;
+
+  line-height: 1.55;
+
+  color: var(--muted);
+
+  text-align: right;
+}
+
+
+.f-links.f-social-links {
+  margin: .25rem 0 0;
+
+  padding: 0;
+
+  gap: .65rem;
+}
+
+
+/* =========================================================
+   BASE SOCIAL ICON
+========================================================= */
+
+.f-social-link {
+  width: 42px;
+  height: 42px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid
+    rgba(16, 16, 20, .10);
+
+  border-radius: 50%;
+
+  background: #fff;
+
+  color: var(--ink);
+
+  box-shadow:
+    0 4px 14px
+    rgba(16, 16, 20, .05);
+
+  transition:
+    transform .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease,
+    background .2s ease;
+}
+
+
+.f-social-link svg {
+  width: 19px;
+  height: 19px;
+
+  fill: none;
+
+  stroke: currentColor;
+
+  stroke-width: 1.8;
+
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+
+.f-social-link .f-social-dot {
+  fill: currentColor;
+
+  stroke: none;
+}
+
+
+/* =========================================================
+   YOUTUBE
+========================================================= */
+
+.f-social-links li:nth-child(1)
+.f-social-link {
+  color: #ff0000;
+
+  border-color:
+    rgba(255, 0, 0, .20);
+
+  background:
+    rgba(255, 0, 0, .045);
+}
+
+
+.f-social-links li:nth-child(1)
+.f-social-link:hover {
+  color: #ff0000;
+
+  border-color:
+    rgba(255, 0, 0, .55);
+
+  background:
+    rgba(255, 0, 0, .08);
+
+  box-shadow:
+    0 8px 22px
+    rgba(255, 0, 0, .16);
+}
+
+
+/* =========================================================
+   FACEBOOK
+========================================================= */
+
+.f-social-links li:nth-child(2)
+.f-social-link {
+  color: #1877f2;
+
+  border-color:
+    rgba(24, 119, 242, .20);
+
+  background:
+    rgba(24, 119, 242, .045);
+}
+
+
+.f-social-links li:nth-child(2)
+.f-social-link:hover {
+  color: #1877f2;
+
+  border-color:
+    rgba(24, 119, 242, .55);
+
+  background:
+    rgba(24, 119, 242, .08);
+
+  box-shadow:
+    0 8px 22px
+    rgba(24, 119, 242, .16);
+}
+
+
+/* =========================================================
+   INSTAGRAM
+========================================================= */
+
+.f-social-links li:nth-child(3)
+.f-social-link {
+  color: #d62976;
+
+  border-color:
+    rgba(214, 41, 118, .22);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(245, 133, 41, .06),
+      rgba(214, 41, 118, .07),
+      rgba(150, 47, 191, .06)
+    );
+}
+
+
+.f-social-links li:nth-child(3)
+.f-social-link:hover {
+  color: #c13584;
+
+  border-color:
+    rgba(193, 53, 132, .55);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(245, 133, 41, .11),
+      rgba(214, 41, 118, .12),
+      rgba(150, 47, 191, .10)
+    );
+
+  box-shadow:
+    0 8px 22px
+    rgba(193, 53, 132, .16);
+}
+
+
+/* =========================================================
+   GENERAL HOVER
+========================================================= */
+
+.f-links
+.f-social-link:hover {
+  transform:
+    translateY(-3px)
+    scale(1.04);
+}
+
+
+/* =========================================================
+   FOOTER SOCIAL RESPONSIVE
+========================================================= */
+
+@media (max-width: 760px) {
+
+  footer {
+    flex-direction: column;
+
+    align-items: center;
+
+    text-align: center;
+  }
+
+
+  .f-social {
+    width: 100%;
+
+    max-width: 480px;
+
+    align-items: center;
+  }
+
+
+  .f-social-copy {
+    text-align: center;
+  }
+
+
+  .f-links.f-social-links {
+    justify-content: center;
+  }
+
+}
+
+
+@media (max-width: 480px) {
+
+  .f-social-copy {
+    font-size: .72rem;
+  }
+
+
+  .f-social-link {
+    width: 40px;
+    height: 40px;
+  }
+
+
+  .f-social-link svg {
+    width: 18px;
+    height: 18px;
+  }
+
+}
+
+/* =========================================================
+   FASHION ENTHUSIAST LEADER — VERIFIED FREE VOTING
+   Replace the existing full block with this one
+========================================================= */
+
+.fashion-leader-voting-section {
+  position: relative;
+  overflow: hidden;
+
+  padding:
+    clamp(4.5rem, 8vw, 7rem)
+    clamp(1.2rem, 5vw, 5rem);
+
+  background: #fbfaf9;
+
+  border-top:
+    1px solid
+    rgba(16, 16, 20, .08);
+}
+
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.fashion-leader-heading {
+  width: min(1180px, 100%);
+
+  margin:
+    0 auto
+    clamp(2.5rem, 5vw, 4.5rem);
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.2fr)
+    minmax(250px, .8fr);
+
+  align-items: center;
+
+  gap:
+    clamp(2rem, 5vw, 5rem);
+}
+
+
+.fashion-leader-heading-copy {
+  max-width: 720px;
+}
+
+
+.fashion-leader-kicker,
+.fashion-leader-group-heading > span,
+.fashion-leader-verify-copy > span {
+  display: block;
+
+  margin-bottom: .8rem;
+
+  font-family:
+    'DM Mono',
+    monospace;
+
+  font-size: .64rem;
+
+  font-weight: 500;
+
+  line-height: 1.4;
+
+  letter-spacing: .17em;
+
+  text-transform: uppercase;
+
+  color: var(--accent);
+}
+
+
+.fashion-leader-heading h2 {
+  margin: 0;
+
+  font-family:
+    'Playfair Display',
+    serif;
+
+  font-size:
+    clamp(
+      2.65rem,
+      5.5vw,
+      5.1rem
+    );
+
+  line-height: .95;
+
+  letter-spacing: -.045em;
+
+  color: var(--ink);
+}
+
+
+.fashion-leader-heading-copy > p {
+  max-width: 650px;
+
+  margin:
+    1.5rem
+    0
+    0;
+
+  font-size:
+    clamp(
+      .92rem,
+      1.25vw,
+      1.05rem
+    );
+
+  line-height: 1.8;
+
+  color: var(--muted);
+}
+
+
+/* =========================================================
+   TROPHY
+========================================================= */
+
+.fashion-leader-trophy {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+}
+
+
+.fashion-leader-trophy img {
+  width:
+    min(
+      100%,
+      350px
+    );
+
+  max-height: 430px;
+
+  object-fit: contain;
+
+  border-radius: 24px;
+
+  border:
+    1px solid
+    rgba(16, 16, 20, .08);
+
+  background: #fff;
+
+  box-shadow:
+    0
+    24px
+    60px
+    rgba(16, 16, 20, .10);
+}
+
+
+/* =========================================================
+   NOMINEES WRAPPER
+========================================================= */
+
+.fashion-leader-groups {
+  width: min(1180px, 100%);
+
+  margin:
+    0
+    auto;
+
+  display: block;
+}
+
+
+.fashion-leader-group {
+  min-width: 0;
+
+  width: 100%;
+}
+
+
+.fashion-leader-group-heading {
+  margin-bottom: 1rem;
+}
+
+
+.fashion-leader-group-heading h3 {
+  margin: 0;
+
+  font-family:
+    'Playfair Display',
+    serif;
+
+  font-size:
+    clamp(
+      1.7rem,
+      2.6vw,
+      2.4rem
+    );
+
+  line-height: 1.05;
+
+  color: var(--ink);
+}
+
+
+/* =========================================================
+   NOMINEE GRID
+   8 nominees:
+   4 down left column
+   4 down right column
+========================================================= */
+
+.fashion-leader-nominee-grid {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-rows:
+    repeat(4, auto);
+
+  grid-auto-flow: column;
+
+  grid-auto-columns:
+    minmax(0, 1fr);
+
+  column-gap:
+    clamp(
+      1.3rem,
+      3vw,
+      2.5rem
+    );
+
+  row-gap: 1rem;
+
+  align-items: stretch;
+}
+
+
+/* =========================================================
+   NOMINEE CARD
+========================================================= */
+
+.fashion-leader-nominee-card {
+  width: 100%;
+
+  min-height: 164px;
+
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    132px
+    minmax(0, 1fr)
+    34px;
+
+  align-items: center;
+
+  gap: 1rem;
+
+  padding:
+    .9rem
+    1rem
+    .9rem
+    .9rem;
+
+  border:
+    1px solid
+    rgba(16, 16, 20, .10);
+
+  border-radius: 20px;
+
+  background: #fff;
+
+  color: var(--ink);
+
+  text-align: left;
+
+  cursor: pointer;
+
+  box-shadow:
+    0
+    8px
+    24px
+    rgba(16, 16, 20, .045);
+
+  transition:
+    transform .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease,
+    background .2s ease;
+}
+
+
+.fashion-leader-nominee-card:hover {
+  transform:
+    translateY(-2px);
+
+  border-color:
+    rgba(230, 50, 98, .30);
+
+  box-shadow:
+    0
+    14px
+    30px
+    rgba(16, 16, 20, .08);
+}
+
+
+.fashion-leader-nominee-card.selected {
+  border-color:
+    var(--accent);
+
+  background:
+    rgba(230, 50, 98, .035);
+
+  box-shadow:
+    0
+    0
+    0
+    2px
+    rgba(230, 50, 98, .08);
+}
+
+
+/* =========================================================
+   NOMINEE PHOTO
+========================================================= */
+
+.fashion-leader-photo-wrap {
+  width: 132px;
+
+  height: 144px;
+
+  display: block;
+
+  overflow: hidden;
+
+  border-radius: 16px;
+
+  background: #f2f2f3;
+}
+
+
+.fashion-leader-photo {
+  width: 100%;
+
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  object-position:
+    center
+    top;
+}
+
+
+.fashion-leader-photo-fallback {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-family:
+    'Playfair Display',
+    serif;
+
+  font-size: 1.7rem;
+
+  font-weight: 800;
+
+  color: var(--accent);
+}
+
+
+/* =========================================================
+   NOMINEE INFO
+========================================================= */
+
+.fashion-leader-nominee-info {
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: .6rem;
+}
+
+
+.fashion-leader-nominee-info strong {
+  font-family:
+    'Playfair Display',
+    serif;
+
+  font-size:
+    clamp(
+      1.05rem,
+      1.5vw,
+      1.3rem
+    );
+
+  line-height: 1.15;
+
+  color: var(--ink);
+}
+
+
+.fashion-leader-nominee-info > span {
+  font-family:
+    'DM Mono',
+    monospace;
+
+  font-size: .62rem;
+
+  letter-spacing: .10em;
+
+  text-transform: uppercase;
+
+  color: var(--muted);
+}
+
+
+/* =========================================================
+   SELECT MARK
+========================================================= */
+
+.fashion-leader-select-mark {
+  width: 31px;
+
+  height: 31px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  justify-self: end;
+
+  border:
+    1px solid
+    rgba(16, 16, 20, .16);
+
+  border-radius: 50%;
+
+  font-size: .85rem;
+
+  font-weight: 800;
+
+  color: #fff;
+
+  background: transparent;
+
+  transition:
+    background .2s ease,
+    border-color .2s ease,
+    transform .2s ease;
+}
+
+
+.fashion-leader-nominee-card.selected
+.fashion-leader-select-mark {
+  border-color:
+    var(--accent);
+
+  background:
+    var(--accent);
+
+  transform:
+    scale(1.04);
+}
+
+
+/* =========================================================
+   EMAIL VERIFICATION CARD
+========================================================= */
+
+.fashion-leader-verify-card {
+  width:
+    min(
+      980px,
+      100%
+    );
+
+  margin:
+    clamp(
+      3rem,
+      6vw,
+      5rem
+    )
+    auto
+    0;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, .9fr)
+    minmax(0, 1.1fr);
+
+  gap:
+    clamp(
+      2rem,
+      5vw,
+      4rem
+    );
+
+  padding:
+    clamp(
+      1.5rem,
+      4vw,
+      3rem
+    );
+
+  border:
+    1px solid
+    rgba(16, 16, 20, .10);
+
+  border-radius: 26px;
+
+  background: #fff;
+
+  box-shadow:
+    0
+    18px
+    50px
+    rgba(16, 16, 20, .07);
+}
+
+
+.fashion-leader-verify-copy h3 {
+  margin: 0;
+
+  font-family:
+    'Playfair Display',
+    serif;
+
+  font-size:
+    clamp(
+      1.8rem,
+      3vw,
+      2.8rem
+    );
+
+  line-height: 1;
+
+  color: var(--ink);
+}
+
+
+.fashion-leader-verify-copy p {
+  margin:
+    1rem
+    0
+    0;
+
+  font-size: .88rem;
+
+  line-height: 1.75;
+
+  color: var(--muted);
+}
+
+
+/* =========================================================
+   VERIFICATION FORM
+========================================================= */
+
+.fashion-leader-verify-form {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: .65rem;
+}
+
+
+.fashion-leader-verify-form label {
+  margin-top: .15rem;
+
+  font-size: .73rem;
+
+  font-weight: 700;
+
+  color: var(--ink);
+}
+
+
+.fashion-leader-verify-form input {
+  width: 100%;
+
+  min-height: 54px;
+
+  padding:
+    .9rem
+    1rem;
+
+  border:
+    1px solid
+    rgba(16, 16, 20, .13);
+
+  border-radius: 13px;
+
+  outline: none;
+
+  background: #fff;
+
+  color: var(--ink);
+
+  font: inherit;
+
+  transition:
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+
+.fashion-leader-verify-form input:focus {
+  border-color:
+    var(--accent);
+
+  box-shadow:
+    0
+    0
+    0
+    3px
+    rgba(230, 50, 98, .08);
+}
+
+
+.fashion-leader-action {
+  margin-top: .4rem;
+
+  min-height: 50px;
+}
+
+
+.fashion-leader-verify-actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: .8rem;
+
+  flex-wrap: wrap;
+}
+
+
+.fashion-leader-resend {
+  min-height: 48px;
+
+  padding:
+    .7rem
+    1rem;
+
+  border: 0;
+
+  background: transparent;
+
+  color: var(--muted);
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+
+.fashion-leader-resend:hover {
+  color:
+    var(--accent);
+}
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+.fashion-leader-message {
+  margin:
+    .45rem
+    0
+    0;
+
+  padding:
+    .9rem
+    1rem;
+
+  border:
+    1px solid
+    rgba(230, 50, 98, .18);
+
+  border-radius: 12px;
+
+  background:
+    rgba(230, 50, 98, .045);
+
+  color: #9f2548;
+
+  font-size: .78rem;
+
+  line-height: 1.55;
+}
+
+
+.fashion-leader-message.success {
+  border-color:
+    rgba(26, 127, 55, .20);
+
+  background:
+    rgba(26, 127, 55, .055);
+
+  color: #1a6e35;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 960px) {
+
+  .fashion-leader-heading,
+  .fashion-leader-verify-card {
+    grid-template-columns: 1fr;
+  }
+
+
+  .fashion-leader-trophy {
+    justify-content:
+      flex-start;
+  }
+
+
+  .fashion-leader-trophy img {
+    width:
+      min(
+        100%,
+        300px
+      );
+  }
+
+
+  .fashion-leader-nominee-grid {
+    grid-template-rows:
+      repeat(4, auto);
+
+    grid-auto-flow: column;
+
+    grid-auto-columns:
+      minmax(0, 1fr);
+
+    column-gap: 1rem;
+  }
+
+
+  .fashion-leader-nominee-card {
+    min-height: 140px;
+
+    grid-template-columns:
+      108px
+      minmax(0, 1fr)
+      30px;
+
+    gap: .8rem;
+
+    padding: .75rem;
+  }
+
+
+  .fashion-leader-photo-wrap {
+    width: 108px;
+
+    height: 120px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   Stack all nominees one per row
+========================================================= */
+
+@media (max-width: 620px) {
+
+  .fashion-leader-voting-section {
+    padding-inline: 1rem;
+  }
+
+
+  .fashion-leader-trophy {
+    justify-content: center;
+  }
+
+
+  .fashion-leader-trophy img {
+    width:
+      min(
+        86vw,
+        290px
+      );
+  }
+
+
+  .fashion-leader-nominee-grid {
+    grid-template-columns: 1fr;
+
+    grid-template-rows: none;
+
+    grid-auto-flow: row;
+
+    grid-auto-columns: auto;
+
+    gap: .9rem;
+  }
+
+
+  .fashion-leader-nominee-card {
+    min-height: 132px;
+
+    grid-template-columns:
+      96px
+      minmax(0, 1fr)
+      30px;
+
+    gap: .75rem;
+
+    padding: .7rem;
+
+    border-radius: 16px;
+  }
+
+
+  .fashion-leader-photo-wrap {
+    width: 96px;
+
+    height: 112px;
+
+    border-radius: 13px;
+  }
+
+
+  .fashion-leader-nominee-info strong {
+    font-size: .98rem;
+  }
+
+
+  .fashion-leader-verify-card {
+    padding: 1.2rem;
+
+    border-radius: 20px;
+  }
+
+
+  .fashion-leader-verify-actions {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+
+  .fashion-leader-verify-actions .btn-p,
+  .fashion-leader-resend {
+    width: 100%;
+  }
+
+}
