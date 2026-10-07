@@ -20,6 +20,8 @@ import imageB from "./assets/imageb.jpeg";
 import imageC from "./assets/imagec.jpeg";
 import imageD from "./assets/imaged.png";
 import image4 from "./assets/image4.jpg";
+import image4 from "./assets/image4.jpg";
+import wingurent from "./assets/wingurent.png";
 
 /* Award contestant photos */
 import mrMeruPhoto from "./assets/Chacha Geofffery Mr Meru University.jpeg";
@@ -5997,6 +5999,18 @@ export default function App() {
                   src={imageD}
 
                   alt="EFWA partner logo 4"
+
+                />
+
+              </div>
+
+              <div className="partner-logo-card">
+
+                <img
+
+                  src={wingurent}
+
+                  alt="Wingurent"
 
                 />
 
