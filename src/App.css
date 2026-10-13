@@ -11015,3 +11015,1082 @@ nav.scrolled .logo-mark img {
   }
 
 }
+
+/* =========================================================
+   FINAL PARTNER LOGOS — ONE LINE
+   Keeps all current partner logos together in a single row.
+========================================================= */
+
+.efwa-closing-section .partners-logo-row {
+  width: min(100%, 980px);
+  margin: 1.8rem auto 0;
+
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+
+  align-items: center;
+  justify-items: center;
+
+  gap: clamp(.65rem, 1.5vw, 1.4rem);
+}
+
+.efwa-closing-section .partner-logo-card {
+  width: 100%;
+  min-width: 0;
+  height: 96px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.efwa-closing-section .partner-logo-card img {
+  display: block;
+
+  width: auto;
+  height: auto;
+
+  max-width: 88px;
+  max-height: 72px;
+
+  object-fit: contain;
+  object-position: center;
+
+  border-radius: 0;
+}
+
+
+/* TABLET — still one line */
+
+@media (max-width: 900px) {
+  .efwa-closing-section .partners-logo-row {
+    width: 100%;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: .75rem;
+  }
+
+  .efwa-closing-section .partner-logo-card {
+    width: 100%;
+    height: 82px;
+  }
+
+  .efwa-closing-section .partner-logo-card img {
+    max-width: 68px;
+    max-height: 58px;
+  }
+}
+
+
+/* MOBILE — still one line */
+
+@media (max-width: 600px) {
+  .efwa-closing-section .partners-logo-row {
+    width: 100%;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: .4rem;
+  }
+
+  .efwa-closing-section .partner-logo-card {
+    width: 100%;
+    height: 68px;
+  }
+
+  .efwa-closing-section .partner-logo-card img {
+    max-width: 52px;
+    max-height: 46px;
+  }
+}
+
+
+/* VERY SMALL PHONES — still one line */
+
+@media (max-width: 380px) {
+  .efwa-closing-section .partners-logo-row {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: .25rem;
+  }
+
+  .efwa-closing-section .partner-logo-card {
+    height: 58px;
+  }
+
+  .efwa-closing-section .partner-logo-card img {
+    max-width: 43px;
+    max-height: 38px;
+  }
+}
+
+/* =========================================================
+   FINAL EXPERIENCE CARDS — PREMIUM IMAGE LAYOUT
+   Works with:
+   .experience-card-media
+   .experience-card-content
+   .experience-card-number
+========================================================= */
+
+.efwa-experience {
+  padding-top: clamp(1rem, 2vw, 2rem);
+}
+
+.experience-heading {
+  margin-bottom: clamp(2rem, 3vw, 3rem);
+  padding-bottom: clamp(1.35rem, 2vw, 1.8rem);
+}
+
+
+/* ---------------------------------------------------------
+   GRID
+--------------------------------------------------------- */
+
+.experience-grid {
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: clamp(1rem, 1.5vw, 1.5rem);
+
+  margin-bottom: clamp(4.5rem, 7vw, 7rem);
+
+  border: 0;
+}
+
+
+/* ---------------------------------------------------------
+   CARD
+--------------------------------------------------------- */
+
+.experience-card {
+  position: relative;
+
+  min-width: 0;
+  min-height: 520px;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 0;
+
+  overflow: hidden;
+
+  background: #fff;
+
+  border: 1px solid rgba(16, 16, 20, .08);
+  border-radius: 20px;
+
+  box-shadow:
+    0 12px 34px rgba(16, 16, 20, .07);
+
+  isolation: isolate;
+
+  transition:
+    transform .35s ease,
+    box-shadow .35s ease,
+    border-color .35s ease;
+}
+
+.experience-card::before {
+  content: '';
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 4px;
+
+  background: var(--accent);
+
+  transform: scaleX(0);
+  transform-origin: left;
+
+  z-index: 5;
+
+  transition: transform .35s ease;
+}
+
+.experience-card:hover {
+  background: #fff;
+
+  transform: translateY(-8px);
+
+  border-color: rgba(230, 50, 98, .18);
+
+  box-shadow:
+    0 22px 55px rgba(16, 16, 20, .13);
+}
+
+.experience-card:hover::before {
+  transform: scaleX(1);
+}
+
+
+/* ---------------------------------------------------------
+   IMAGE AREA
+--------------------------------------------------------- */
+
+.experience-card-media {
+  position: relative;
+
+  width: 100%;
+  height: 320px;
+
+  flex-shrink: 0;
+
+  overflow: hidden;
+
+  background: #ececef;
+}
+
+.experience-card-media::after {
+  content: '';
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(13, 13, 18, .20) 0%,
+      rgba(13, 13, 18, .03) 42%,
+      rgba(13, 13, 18, 0) 68%
+    );
+
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+.experience-card-media img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+  object-position: center;
+
+  transform: scale(1.001);
+
+  transition:
+    transform .7s cubic-bezier(.2, .7, .2, 1),
+    filter .5s ease;
+}
+
+.experience-card:hover .experience-card-media img {
+  transform: scale(1.055);
+}
+
+
+/* ---------------------------------------------------------
+   CONTENT AREA
+--------------------------------------------------------- */
+
+.experience-card-content {
+  position: relative;
+
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  padding:
+    clamp(1.3rem, 1.8vw, 1.65rem)
+    clamp(1.25rem, 1.7vw, 1.55rem)
+    clamp(1.5rem, 2vw, 1.8rem);
+
+  background: #fff;
+}
+
+.experience-card-number {
+  display: inline-flex;
+  align-items: center;
+
+  width: fit-content;
+
+  margin-bottom: .9rem;
+
+  font-family: 'DM Mono', monospace;
+  font-size: .59rem;
+  font-weight: 500;
+
+  letter-spacing: .18em;
+  text-transform: uppercase;
+
+  color: var(--accent);
+}
+
+.experience-card-number::after {
+  content: '';
+
+  width: 28px;
+  height: 1px;
+
+  margin-left: .7rem;
+
+  background: rgba(230, 50, 98, .55);
+}
+
+.experience-card h4 {
+  margin: 0 0 .8rem;
+
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.2rem, 1.45vw, 1.55rem);
+  font-weight: 900;
+
+  line-height: 1.12;
+  letter-spacing: -.018em;
+
+  color: var(--ink);
+}
+
+.experience-card p {
+  max-width: none;
+
+  margin: 0;
+
+  font-size: .79rem;
+  line-height: 1.65;
+  font-weight: 300;
+
+  color: var(--muted);
+}
+
+
+/* ---------------------------------------------------------
+   LARGE TABLETS / SMALL LAPTOPS
+--------------------------------------------------------- */
+
+@media (max-width: 1200px) {
+
+  .experience-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .experience-card {
+    min-height: 500px;
+  }
+
+  .experience-card-media {
+    height: 300px;
+  }
+
+}
+
+
+/* ---------------------------------------------------------
+   TABLET
+--------------------------------------------------------- */
+
+@media (max-width: 900px) {
+
+  .experience-heading {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
+
+  .experience-heading p {
+    justify-self: start;
+    max-width: 620px;
+  }
+
+  .experience-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.1rem;
+  }
+
+  .experience-card {
+    min-height: 480px;
+  }
+
+  .experience-card-media {
+    height: 285px;
+  }
+
+  .experience-card h4 {
+    font-size: 1.3rem;
+  }
+
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+--------------------------------------------------------- */
+
+@media (max-width: 600px) {
+
+  .experience-grid {
+    grid-template-columns: 1fr;
+
+    gap: 1.25rem;
+
+    margin-bottom: 4rem;
+  }
+
+  .experience-card {
+    min-height: 0;
+
+    border-radius: 18px;
+  }
+
+  .experience-card-media {
+    height: clamp(300px, 82vw, 430px);
+  }
+
+  .experience-card-content {
+    padding:
+      1.35rem
+      1.25rem
+      1.55rem;
+  }
+
+  .experience-card h4 {
+    font-size: clamp(1.35rem, 6vw, 1.7rem);
+  }
+
+  .experience-card p {
+    font-size: .82rem;
+  }
+
+}
+
+
+/* ---------------------------------------------------------
+   VERY SMALL PHONES
+--------------------------------------------------------- */
+
+@media (max-width: 380px) {
+
+  .experience-card-media {
+    height: 285px;
+  }
+
+  .experience-card-content {
+    padding:
+      1.2rem
+      1.1rem
+      1.4rem;
+  }
+
+}
+
+/* =========================================================
+   FINAL PHOTOGRAPHER & VIDEOGRAPHER AWARD VOTING
+========================================================= */
+
+.special-awards-section {
+  background:
+    radial-gradient(
+      circle at 8% 5%,
+      rgba(230, 50, 98, .055),
+      transparent 28%
+    ),
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #faf8f6 100%
+    );
+}
+
+.creative-awards-categories {
+  width: min(100%, 1320px);
+
+  margin: 0 auto;
+
+  display: grid;
+
+  gap: clamp(2.2rem, 4vw, 4rem);
+}
+
+
+/* ---------------------------------------------------------
+   CATEGORY PANEL
+--------------------------------------------------------- */
+
+.creative-award-category {
+  overflow: hidden;
+
+  background: #fff;
+
+  border: 1px solid rgba(16, 16, 20, .08);
+
+  border-radius: 28px;
+
+  box-shadow:
+    0 24px 70px rgba(20, 16, 14, .08);
+}
+
+.creative-award-category-header {
+  display: grid;
+
+  grid-template-columns:
+    minmax(280px, .72fr)
+    minmax(0, 1.28fr);
+
+  align-items: stretch;
+
+  min-height: 390px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff 0%,
+      #fbf8f5 100%
+    );
+
+  border-bottom:
+    1px solid rgba(16, 16, 20, .07);
+}
+
+.creative-award-trophy {
+  min-height: 390px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding:
+    clamp(1.5rem, 3vw, 2.8rem);
+
+  background:
+    linear-gradient(
+      145deg,
+      #fff 0%,
+      #f5f1ed 100%
+    );
+}
+
+.creative-award-trophy img {
+  width: 100%;
+  height: 100%;
+
+  max-width: 330px;
+  max-height: 330px;
+
+  object-fit: contain;
+  object-position: center;
+
+  filter:
+    drop-shadow(
+      0 18px 22px
+      rgba(20, 16, 14, .12)
+    );
+
+  transition: transform .45s ease;
+}
+
+.creative-award-category:hover
+.creative-award-trophy img {
+  transform: translateY(-4px) scale(1.018);
+}
+
+.creative-award-category-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding:
+    clamp(2rem, 4vw, 4rem);
+}
+
+.creative-award-category-copy h3 {
+  max-width: 720px;
+
+  margin:
+    0
+    0
+    1.15rem;
+
+  font-family: 'Playfair Display', serif;
+
+  font-size:
+    clamp(
+      2.3rem,
+      4vw,
+      4rem
+    );
+
+  font-weight: 900;
+
+  line-height: .98;
+
+  letter-spacing: -.035em;
+
+  color: var(--ink);
+}
+
+.creative-award-category-copy p {
+  max-width: 650px;
+
+  margin-bottom: 1.4rem;
+
+  font-size: .9rem;
+
+  line-height: 1.75;
+
+  color: var(--muted);
+}
+
+.creative-award-price {
+  display: inline-flex;
+
+  align-items: center;
+
+  width: fit-content;
+
+  min-height: 38px;
+
+  padding:
+    .55rem
+    .95rem;
+
+  border:
+    1px solid
+    rgba(230, 50, 98, .16);
+
+  border-radius: 999px;
+
+  background:
+    rgba(230, 50, 98, .07);
+
+  color: var(--accent);
+
+  font-family: 'DM Mono', monospace;
+
+  font-size: .64rem;
+  font-weight: 500;
+
+  letter-spacing: .08em;
+
+  text-transform: uppercase;
+}
+
+
+/* ---------------------------------------------------------
+   NOMINEE GRID
+--------------------------------------------------------- */
+
+.creative-award-nominees {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      4,
+      minmax(0, 1fr)
+    );
+
+  gap: 1px;
+
+  background:
+    rgba(16, 16, 20, .08);
+}
+
+
+/* ---------------------------------------------------------
+   NOMINEE CARD
+--------------------------------------------------------- */
+
+.creative-award-nominee-card {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #fff;
+
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease,
+    background .3s ease;
+}
+
+.creative-award-nominee-card:hover {
+  position: relative;
+
+  z-index: 2;
+
+  background: #fff;
+
+  box-shadow:
+    0 20px 45px
+    rgba(20, 16, 14, .10);
+}
+
+.creative-award-nominee-photo {
+  position: relative;
+
+  width: 100%;
+  height: 310px;
+
+  overflow: hidden;
+
+  background: #ecebef;
+}
+
+.creative-award-nominee-photo::after {
+  content: '';
+
+  position: absolute;
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(13, 13, 18, .24) 0%,
+      transparent 42%
+    );
+
+  pointer-events: none;
+}
+
+.creative-award-nominee-photo img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  transition:
+    transform .55s ease;
+}
+
+.creative-award-nominee-card:hover
+.creative-award-nominee-photo img {
+  transform: scale(1.045);
+}
+
+
+/* ---------------------------------------------------------
+   LIVE VOTE TOTAL
+--------------------------------------------------------- */
+
+.creative-award-vote-count {
+  position: absolute;
+
+  right: 1rem;
+  bottom: 1rem;
+
+  z-index: 3;
+
+  display: flex;
+  align-items: baseline;
+
+  gap: .35rem;
+
+  padding:
+    .55rem
+    .8rem;
+
+  background:
+    rgba(13, 13, 18, .86);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  border:
+    1px solid
+    rgba(255, 255, 255, .14);
+
+  border-radius: 999px;
+
+  color: #fff;
+}
+
+.creative-award-vote-count strong {
+  font-family: 'Playfair Display', serif;
+
+  font-size: 1.05rem;
+
+  line-height: 1;
+}
+
+.creative-award-vote-count small {
+  font-size: .58rem;
+
+  text-transform: uppercase;
+
+  letter-spacing: .08em;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      .68
+    );
+}
+
+
+/* ---------------------------------------------------------
+   NOMINEE INFORMATION
+--------------------------------------------------------- */
+
+.creative-award-nominee-body {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  padding:
+    1.45rem
+    1.3rem
+    1.4rem;
+}
+
+.creative-award-nominee-type {
+  margin-bottom: .65rem;
+
+  font-family: 'DM Mono', monospace;
+
+  font-size: .55rem;
+  font-weight: 500;
+
+  letter-spacing: .13em;
+
+  text-transform: uppercase;
+
+  color: var(--accent);
+}
+
+.creative-award-nominee-body h4 {
+  min-height: 2.8em;
+
+  margin-bottom: 1rem;
+
+  font-family: 'Playfair Display', serif;
+
+  font-size:
+    clamp(
+      1.2rem,
+      1.6vw,
+      1.55rem
+    );
+
+  font-weight: 900;
+
+  line-height: 1.12;
+
+  letter-spacing: -.015em;
+
+  color: var(--ink);
+}
+
+
+/* ---------------------------------------------------------
+   SOCIAL LINK
+--------------------------------------------------------- */
+
+.creative-award-social-link {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: .75rem;
+
+  width: 100%;
+
+  margin-top: auto;
+  margin-bottom: .85rem;
+
+  padding:
+    .78rem
+    .9rem;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius: 12px;
+
+  background: #fafafa;
+
+  color: var(--ink);
+
+  font-size: .72rem;
+  font-weight: 600;
+
+  text-decoration: none;
+
+  transition:
+    color .25s ease,
+    border-color .25s ease,
+    background .25s ease,
+    transform .25s ease;
+}
+
+.creative-award-social-link span {
+  color: var(--accent);
+
+  font-size: .95rem;
+}
+
+.creative-award-social-link:hover {
+  color: var(--accent);
+
+  border-color:
+    rgba(230, 50, 98, .25);
+
+  background:
+    rgba(230, 50, 98, .055);
+
+  transform: translateY(-1px);
+}
+
+
+/* ---------------------------------------------------------
+   VOTE BUTTON
+--------------------------------------------------------- */
+
+.creative-award-vote-button {
+  width: 100%;
+
+  min-height: 48px;
+
+  padding:
+    .8rem
+    1rem;
+
+  font-size: .76rem;
+}
+
+.creative-award-vote-button:disabled {
+  background: #d7d7dc;
+
+  border-color: #d7d7dc;
+
+  color: #777780;
+
+  cursor: not-allowed;
+
+  box-shadow: none;
+}
+
+.creative-award-message {
+  width: min(100%, 900px);
+
+  margin:
+    2rem
+    auto
+    0;
+}
+
+
+/* =========================================================
+   RESPONSIVE — SPECIAL CREATIVE AWARDS
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .creative-award-category-header {
+    grid-template-columns:
+      minmax(240px, .8fr)
+      minmax(0, 1.2fr);
+  }
+
+  .creative-award-nominees {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+  }
+
+  .creative-award-nominee-photo {
+    height: 360px;
+  }
+
+}
+
+
+@media (max-width: 760px) {
+
+  .creative-award-category {
+    border-radius: 22px;
+  }
+
+  .creative-award-category-header {
+    grid-template-columns: 1fr;
+
+    min-height: 0;
+  }
+
+  .creative-award-trophy {
+    min-height: 320px;
+
+    padding:
+      1.6rem
+      1.4rem;
+  }
+
+  .creative-award-trophy img {
+    max-width: 290px;
+    max-height: 290px;
+  }
+
+  .creative-award-category-copy {
+    padding:
+      2rem
+      1.45rem
+      2.3rem;
+  }
+
+  .creative-award-category-copy h3 {
+    font-size:
+      clamp(
+        2.25rem,
+        11vw,
+        3.4rem
+      );
+  }
+
+  .creative-award-nominees {
+    grid-template-columns: 1fr;
+
+    gap: 1px;
+  }
+
+  .creative-award-nominee-photo {
+    height:
+      clamp(
+        340px,
+        105vw,
+        520px
+      );
+  }
+
+  .creative-award-nominee-body {
+    padding:
+      1.4rem
+      1.25rem
+      1.5rem;
+  }
+
+  .creative-award-nominee-body h4 {
+    min-height: 0;
+
+    font-size: 1.55rem;
+  }
+
+}
+
+
+@media (max-width: 420px) {
+
+  .creative-award-trophy {
+    min-height: 280px;
+  }
+
+  .creative-award-trophy img {
+    max-width: 245px;
+    max-height: 245px;
+  }
+
+  .creative-award-nominee-photo {
+    height: 330px;
+  }
+
+}
+

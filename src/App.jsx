@@ -20,8 +20,32 @@ import imageB from "./assets/imageb.jpeg";
 import imageC from "./assets/imagec.jpeg";
 import imageD from "./assets/imaged.png";
 import image4 from "./assets/image4.jpg";
-import image4 from "./assets/image4.jpg";
 import wingurent from "./assets/wingurent.png";
+import imageX from "./assets/imagex.jpeg";
+
+/* What to Expect experience images */
+import imageHigh from "./assets/imagehigh.jpeg";
+import imageLive from "./assets/imagelive.jpeg";
+import imageArt from "./assets/imageart.jpeg";
+import imageWine from "./assets/imagewine.jpeg";
+import imageOpen from "./assets/imageopen.jpeg";
+import imageMeet from "./assets/imagemeet.jpeg";
+import imageFashion from "./assets/imagefashion.jpeg";
+import imageTalent from "./assets/imagetalent.jpeg";
+import imageService from "./assets/imageservice.jpeg";
+import imageVip from "./assets/imagevip.jpeg";
+import imageTable from "./assets/imagetable.jpeg";
+import imageOutdoor from "./assets/imageoutdoor.jpeg";
+
+/* Photographer & Videographer award nominee photos */
+import imageKanambo from "./assets/imagekanambo.png";
+import imageCharry from "./assets/imagecharry.jpeg";
+import imageUrban from "./assets/imageurban.jpeg";
+import imageEve from "./assets/imageeve.jpg";
+import imageChilla from "./assets/imagechilla.jpg";
+import imageKevin from "./assets/imagekevin.jpeg";
+import imageEphy from "./assets/imageephy.jpeg";
+import imageFlash from "./assets/imageflash.jpeg";
 
 /* Award contestant photos */
 import mrMeruPhoto from "./assets/Chacha Geofffery Mr Meru University.jpeg";
@@ -94,6 +118,89 @@ const initialExhibitorFormData = {
 };
 
 const AWARD_VOTE_FEE = 10;
+
+/* =========================================================
+   PHOTOGRAPHER & VIDEOGRAPHER AWARD NOMINEES
+
+   The visible profile details live here.
+   Supabase award_contestants remains the source of:
+   - contestant id
+   - live vote total
+   - active/inactive status
+
+   The contestant_slug values below must match the rows in
+   award_contestants for paid voting to work.
+========================================================= */
+
+const PHOTOGRAPHER_AWARD_NOMINEES = [
+  {
+    name: "Kanambo Photography",
+    slug: "kanambo-photography-2026",
+    photo: imageKanambo,
+    platform: "Instagram",
+    socialUrl:
+      "https://www.instagram.com/konambo_pics?stkn=b2syYm81aDdmM3kz",
+  },
+  {
+    name: "Charry Studios",
+    slug: "charry-studios-2026",
+    photo: imageCharry,
+    platform: "Instagram",
+    socialUrl:
+      "https://www.instagram.com/charry_studios.ke?stkn=MTg3ZXhqb2NhZzJncQ==",
+  },
+  {
+    name: "Urbantrend Photography",
+    slug: "urbantrend-photography-2026",
+    photo: imageUrban,
+    platform: "Instagram",
+    socialUrl:
+      "https://www.instagram.com/u.rbantrend_ke?stkn=bWJ4YmpxcXo1NDAz",
+  },
+  {
+    name: "EveB Photographe",
+    slug: "eveb-photographe-2026",
+    photo: imageEve,
+    platform: "Facebook",
+    socialUrl:
+      "https://www.facebook.com/eve.b.photographe.2025",
+  },
+];
+
+const VIDEOGRAPHER_AWARD_NOMINEES = [
+  {
+    name: "Chilla Art Photography",
+    slug: "chilla-art-photography-2026",
+    photo: imageChilla,
+    platform: "Instagram",
+    socialUrl:
+      "https://www.instagram.com/chillaphotography?stkn=dHN3ajY4N2Z0dDd6",
+  },
+  {
+    name: "Kelvin Kamau",
+    slug: "kelvin-kamau-2026",
+    photo: imageKevin,
+    platform: "Instagram",
+    socialUrl:
+      "https://www.instagram.com/kevin_kamau_?stkn=ZGhxemFjbjc0eGls",
+  },
+  {
+    name: "Ephy Muriuki",
+    slug: "ephy-muriuki-2026",
+    photo: imageEphy,
+    platform: "Instagram",
+    socialUrl:
+      "https://www.instagram.com/ephy_muriuki?vrfl=eXlndGM1MWZqYXZi",
+  },
+  {
+    name: "Flash Studios Embu",
+    slug: "flash-studios-embu-2026",
+    photo: imageFlash,
+    platform: "Instagram",
+    socialUrl:
+      "https://www.instagram.com/flashstudiosembu?vrfl=amY1eHg4eDVtbWw3",
+  },
+];
 
 /* =========================================================
    AWARD CONTESTANT PHOTOS
@@ -615,9 +722,45 @@ export default function App() {
     setFashionLeaderNominees(data || []);
   };
 
-  useEffect(() => {
-    loadFashionLeaderNominees();
-  }, []);
+
+/* LOAD FASHION ENTHUSIAST LEADER NOMINEES */
+
+useEffect(() => {
+  let cancelled = false;
+
+  const fetchNominees = async () => {
+    const { data, error } = await supabase
+      .from("fashion_leader_nominees")
+      .select(
+        "id,nominee_name,nominee_slug,gender,display_order,vote_count,is_active"
+      )
+      .eq("is_active", true)
+      .order("display_order", { ascending: true });
+
+    if (cancelled) return;
+
+    if (error) {
+      console.error(
+        "Unable to load Fashion Enthusiast Leader nominees:",
+        error
+      );
+
+      setFashionLeaderMessage(
+        "We could not load the Fashion Enthusiast Leader nominees. Please refresh the page."
+      );
+      return;
+    }
+
+    setFashionLeaderNominees(data || []);
+  };
+
+  fetchNominees();
+
+  return () => {
+    cancelled = true;
+  };
+}, []);
+
 
   /* =========================================================
 
@@ -2011,6 +2154,36 @@ export default function App() {
 
   ========================================================= */
 
+  const openAwardVoteForContestant = (contestant) => {
+
+    if (!contestant?.id) {
+
+      setAwardVoteMessage(
+        "Voting for this nominee is not active yet. Please refresh the page or try again shortly."
+      );
+
+      return;
+
+    }
+
+    setAwardVoteContestant(contestant);
+
+    setAwardVotePhone("");
+
+    setAwardVoteQuantity(1);
+
+    setAwardVotePaymentStage("idle");
+
+    setAwardVoteExternalReference("");
+
+    setAwardVotePaymentMessage("");
+
+    setAwardVoteMessage("");
+
+    setAwardVoteModalOpen(true);
+
+  };
+
   const handleAwardVote = (category) => {
 
     const contestantId =
@@ -2035,21 +2208,7 @@ export default function App() {
 
     }
 
-    setAwardVoteContestant(contestant);
-
-    setAwardVotePhone("");
-
-    setAwardVoteQuantity(1);
-
-    setAwardVotePaymentStage("idle");
-
-    setAwardVoteExternalReference("");
-
-    setAwardVotePaymentMessage("");
-
-    setAwardVoteMessage("");
-
-    setAwardVoteModalOpen(true);
+    openAwardVoteForContestant(contestant);
 
   };
 
@@ -3072,7 +3231,7 @@ export default function App() {
 
             <p>
 
-              Hosted at Winter Villa Hotel Resort, the
+              Hosted at The Mavvel Hotel, Embu, the
 
               one-day-to-night experience brings together
 
@@ -3211,175 +3370,241 @@ export default function App() {
           <div className="experience-grid reveal">
 
             <article className="experience-card">
-
-              <h4>
-
-                High Fashion
-
-                <br />
-
-                Runway Showcase
-
-              </h4>
-
-              <p>
-
-                Emerging and established designers from the
-
-                Mt. Kenya region take centre stage.
-
-              </p>
-
+              <div className="experience-card-media">
+                <img
+                  src={imageHigh}
+                  alt="High Fashion Runway Showcase"
+                />
+              </div>
+              <div className="experience-card-content">
+                <span className="experience-card-number"></span>
+                <h4>
+                  High Fashion
+                  <br />
+                  Runway Showcase
+                </h4>
+                <p>
+                  Emerging and established designers from the
+                  Mt. Kenya region take centre stage.
+                </p>
+              </div>
             </article>
 
             <article className="experience-card">
-
-              <h4>
-
-                Live Music &amp;
-
-                <br />
-
-                Performing Arts
-
-              </h4>
-
-              <p>
-
-                Live performances bringing music, movement
-
-                and creative expression into the experience.
-
-              </p>
-
+              <div className="experience-card-media">
+                <img
+                  src={imageLive}
+                  alt="Live Music and Performing Arts"
+                />
+              </div>
+              <div className="experience-card-content">
+                <span className="experience-card-number"></span>
+                <h4>
+                  Live Music &amp;
+                  <br />
+                  Performing Arts
+                </h4>
+                <p>
+                  Live performances bringing music, movement
+                  and creative expression into the experience.
+                </p>
+              </div>
             </article>
 
             <article className="experience-card">
-
-              <h4>
-
-                Art Exhibition
-
-              </h4>
-
-              <p>
-
-                A curated art experience presented by
-
-                Nakuru Art Gallery.
-
-              </p>
-
+              <div className="experience-card-media">
+                <img
+                  src={imageArt}
+                  alt="Art Exhibition"
+                />
+              </div>
+              <div className="experience-card-content">
+                <span className="experience-card-number"></span>
+                <h4>Art Exhibition</h4>
+                <p>
+                  A curated art experience presented by
+                  Nakuru Art Gallery.
+                </p>
+              </div>
             </article>
 
             <article className="experience-card">
-
-              <h4>
-
-                Wine Tasting
-
-              </h4>
-
-              <p>
-
-                A relaxed tasting experience integrated
-
-                into the event&apos;s lifestyle programme.
-
-              </p>
-
+              <div className="experience-card-media">
+                <img
+                  src={imageWine}
+                  alt="Wine Tasting"
+                />
+              </div>
+              <div className="experience-card-content">
+                <span className="experience-card-number"></span>
+                <h4>Wine Tasting</h4>
+                <p>
+                  A relaxed tasting experience integrated
+                  into the event&apos;s lifestyle programme.
+                </p>
+              </div>
             </article>
 
             <article className="experience-card">
-
-              <h4>
-
-                Open Bar &amp;
-
-                <br />
-
-                Lifestyle Experience
-
-              </h4>
-
-              <p>
-
-                An open-air hospitality experience designed
-
-                around conversation, music and atmosphere.
-
-              </p>
-
+              <div className="experience-card-media">
+                <img
+                  src={imageOpen}
+                  alt="Open Bar and Lifestyle Experience"
+                />
+              </div>
+              <div className="experience-card-content">
+                <span className="experience-card-number"></span>
+                <h4>
+                  Open Bar &amp;
+                  <br />
+                  Lifestyle Experience
+                </h4>
+                <p>
+                  An open-air hospitality experience designed
+                  around conversation, music and atmosphere.
+                </p>
+              </div>
             </article>
 
             <article className="experience-card">
-
-              <h4>
-
-                Meet &amp; Greet
-
-                <br />
-
-                &amp; Networking
-
-              </h4>
-
-              <p>
-
-                A space for creatives, guests, brands and
-
-                industry players to meet and connect.
-
-              </p>
-
+              <div className="experience-card-media">
+                <img
+                  src={imageMeet}
+                  alt="Meet and Greet and Networking"
+                />
+              </div>
+              <div className="experience-card-content">
+                <span className="experience-card-number"></span>
+                <h4>
+                  Meet &amp; Greet
+                  <br />
+                  &amp; Networking
+                </h4>
+                <p>
+                  A space for creatives, guests, brands and
+                  industry players to meet and connect.
+                </p>
+              </div>
             </article>
 
             <article className="experience-card">
-
-              <h4>
-
-                Fashion &amp;
-
-                <br />
-
-                Creative Arts Awards
-
-              </h4>
-
-              <p>
-
-                Recognition of creative talent and
-
-                contribution across the regional creative
-
-                economy.
-
-              </p>
-
+              <div className="experience-card-media">
+                <img
+                  src={imageFashion}
+                  alt="Fashion and Creative Arts Awards"
+                />
+              </div>
+              <div className="experience-card-content">
+                <span className="experience-card-number"></span>
+                <h4>
+                  Fashion &amp;
+                  <br />
+                  Creative Arts Awards
+                </h4>
+                <p>
+                  Recognition of creative talent and
+                  contribution across the regional creative
+                  economy.
+                </p>
+              </div>
             </article>
 
             <article className="experience-card">
+              <div className="experience-card-media">
+                <img
+                  src={imageTalent}
+                  alt="Emerging and Established Talent"
+                />
+              </div>
+              <div className="experience-card-content">
+                <span className="experience-card-number"></span>
+                <h4>
+                  Emerging &amp;
+                  <br />
+                  Established Talent
+                </h4>
+                <p>
+                  A shared platform for new voices and
+                  established creatives to reach wider
+                  audiences.
+                </p>
+              </div>
+            </article>
 
-              <h4>
+            <article className="experience-card">
+              <div className="experience-card-media">
+                <img
+                  src={imageService}
+                  alt="Room Service"
+                />
+              </div>
+              <div className="experience-card-content">
+                <span className="experience-card-number"></span>
+                <h4>Room Service</h4>
+                <p>
+                  A convenient hospitality option designed
+                  to complement the full event experience.
+                </p>
+              </div>
+            </article>
 
-                Emerging &amp;
+            <article className="experience-card">
+              <div className="experience-card-media">
+                <img
+                  src={imageVip}
+                  alt="VIP Afterparty Venue"
+                />
+              </div>
+              <div className="experience-card-content">
+                <span className="experience-card-number"></span>
+                <h4>
+                  VIP Afterparty
+                  <br />
+                  Venue
+                </h4>
+                <p>
+                  A dedicated setting for the VIP afterparty
+                  and the event&apos;s late-evening experience.
+                </p>
+              </div>
+            </article>
 
-                <br />
+            <article className="experience-card">
+              <div className="experience-card-media">
+                <img
+                  src={imageTable}
+                  alt="Table of 4"
+                />
+              </div>
+              <div className="experience-card-content">
+                <span className="experience-card-number"></span>
+                <h4>Table of 4</h4>
+                <p>
+                  A shared table experience for groups of four
+                  attending and enjoying the event together.
+                </p>
+              </div>
+            </article>
 
-                Established Talent
-
-              </h4>
-
-              <p>
-
-                A shared platform for new voices and
-
-                established creatives to reach wider
-
-                audiences.
-
-              </p>
-
+            <article className="experience-card">
+              <div className="experience-card-media">
+                <img
+                  src={imageOutdoor}
+                  alt="Outdoor Meet and Greet"
+                />
+              </div>
+              <div className="experience-card-content">
+                <span className="experience-card-number"></span>
+                <h4>
+                  Outdoor Meet
+                  <br />
+                  &amp; Greet
+                </h4>
+                <p>
+                  An outdoor social space for relaxed
+                  conversation, introductions and networking.
+                </p>
+              </div>
             </article>
 
           </div>
@@ -3408,7 +3633,7 @@ export default function App() {
 
               <span>Performance</span>
 
-              Live Music &amp; Performing Arts
+             High Fashion Show &amp; Awards 
 
             </figcaption>
 
@@ -5559,112 +5784,234 @@ export default function App() {
 
       {/* =====================================================
 
-          ADDITIONAL EMBU FASHION AWARDS — NOMINATIONS
+          PHOTOGRAPHER & VIDEOGRAPHER AWARDS — PAID VOTING
 
       ====================================================== */}
 
       <section
         className="special-awards-section"
-        id="award-nominations"
+        id="creative-awards-voting"
       >
         <div className="special-awards-heading reveal">
           <span className="special-awards-kicker">
-            Embu Fashion Awards 2026
+            Embu Fashion Awards 2026 · Voting Now Open
           </span>
 
           <h2>
-            Additional Award
+            Photographer &amp;
             <br />
-            Categories
+            Videographer Awards
           </h2>
 
           <p>
-            Celebrating the creatives, storytellers, and industry
-            personalities helping shape fashion and the creative economy.
+            Support the creatives whose photography and videography help
+            document fashion, people, culture, events, and the creative arts.
+            Each confirmed vote costs KSh {AWARD_VOTE_FEE}.
           </p>
         </div>
 
-        <div className="special-awards-grid reveal">
+        <div className="creative-awards-categories">
 
-          <article className="special-award-card">
-            <div className="special-award-image">
-              <img
-                src={imageL}
-                alt="Embu Fashion Awards Best Videography of the Year 2026 trophy"
-              />
+          {/* ===============================================
+              BEST PHOTOGRAPHER
+          ================================================ */}
+
+          <article className="creative-award-category reveal">
+            <div className="creative-award-category-header">
+              <div className="creative-award-trophy">
+                <img
+                  src={imageL}
+                  alt="Embu Fashion Awards Best Photographer of the Year 2026 trophy"
+                />
+              </div>
+
+              <div className="creative-award-category-copy">
+                <span className="special-award-label">
+                  Photography
+                </span>
+
+                <h3>
+                  Best Photographer
+                  <br />
+                  of the Year 2026
+                </h3>
+
+                <p>
+                  Vote for the photographer whose work best captures fashion,
+                  people, culture, events, and creative expression.
+                </p>
+
+                <span className="creative-award-price">
+                  KSh {AWARD_VOTE_FEE} per vote
+                </span>
+              </div>
             </div>
 
-            <div className="special-award-content">
-              <span className="special-award-label">
-                Media &amp; Production
-              </span>
+            <div className="creative-award-nominees">
+              {PHOTOGRAPHER_AWARD_NOMINEES.map((nominee) => {
+                const contestant = awardContestants.find(
+                  (item) => item.contestant_slug === nominee.slug
+                );
 
-              <h3>
-                Best Videography
-                <br />
-                of the Year 2026
-              </h3>
+                return (
+                  <article
+                    className="creative-award-nominee-card"
+                    key={nominee.slug}
+                  >
+                    <div className="creative-award-nominee-photo">
+                      <img
+                        src={nominee.photo}
+                        alt={nominee.name}
+                        loading="lazy"
+                      />
 
-              <p>
-                Recognising outstanding visual storytelling, creative
-                direction, and video production within fashion, events,
-                lifestyle, and the creative arts.
-              </p>
+                      <span className="creative-award-vote-count">
+                        <strong>{contestant?.vote_count || 0}</strong>
+                        <small>votes</small>
+                      </span>
+                    </div>
+
+                    <div className="creative-award-nominee-body">
+                      <span className="creative-award-nominee-type">
+                        Photographer Nominee
+                      </span>
+
+                      <h4>{nominee.name}</h4>
+
+                      <a
+                        className="creative-award-social-link"
+                        href={nominee.socialUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`View ${nominee.name} on ${nominee.platform}`}
+                      >
+                        View on {nominee.platform}
+                        <span aria-hidden="true">↗</span>
+                      </a>
+
+                      <button
+                        type="button"
+                        className="btn-p creative-award-vote-button"
+                        disabled={!contestant?.id}
+                        onClick={() =>
+                          openAwardVoteForContestant(contestant)
+                        }
+                      >
+                        {contestant?.id
+                          ? `Vote · KSh ${AWARD_VOTE_FEE} each`
+                          : "Voting Setup Pending"}
+                      </button>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           </article>
 
-          <article className="special-award-card">
-            <div className="special-award-image">
-              <img
-                src={imageM}
-                alt="Embu Fashion Awards Best Photographer of the Year 2026 trophy"
-              />
+          {/* ===============================================
+              BEST VIDEOGRAPHY
+          ================================================ */}
+
+          <article className="creative-award-category reveal">
+            <div className="creative-award-category-header">
+              <div className="creative-award-trophy">
+                <img
+                  src={imageN}
+                  alt="Embu Fashion Awards Best Videography of the Year 2026 trophy"
+                />
+              </div>
+
+              <div className="creative-award-category-copy">
+                <span className="special-award-label">
+                  Media &amp; Production
+                </span>
+
+                <h3>
+                  Best Videography
+                  <br />
+                  of the Year 2026
+                </h3>
+
+                <p>
+                  Vote for the videographer whose visual storytelling,
+                  production, and creative direction stand out across fashion,
+                  events, lifestyle, and the creative arts.
+                </p>
+
+                <span className="creative-award-price">
+                  KSh {AWARD_VOTE_FEE} per vote
+                </span>
+              </div>
             </div>
 
-            <div className="special-award-content">
-              <span className="special-award-label">
-                Photography
-              </span>
+            <div className="creative-award-nominees">
+              {VIDEOGRAPHER_AWARD_NOMINEES.map((nominee) => {
+                const contestant = awardContestants.find(
+                  (item) => item.contestant_slug === nominee.slug
+                );
 
-              <h3>
-                Best Photographer
-                <br />
-                of the Year 2026
-              </h3>
+                return (
+                  <article
+                    className="creative-award-nominee-card"
+                    key={nominee.slug}
+                  >
+                    <div className="creative-award-nominee-photo">
+                      <img
+                        src={nominee.photo}
+                        alt={nominee.name}
+                        loading="lazy"
+                      />
 
-              <p>
-                Celebrating photographers whose work captures fashion,
-                people, culture, events, and creative expression with
-                originality and impact.
-              </p>
+                      <span className="creative-award-vote-count">
+                        <strong>{contestant?.vote_count || 0}</strong>
+                        <small>votes</small>
+                      </span>
+                    </div>
+
+                    <div className="creative-award-nominee-body">
+                      <span className="creative-award-nominee-type">
+                        Videographer Nominee
+                      </span>
+
+                      <h4>{nominee.name}</h4>
+
+                      <a
+                        className="creative-award-social-link"
+                        href={nominee.socialUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`View ${nominee.name} on ${nominee.platform}`}
+                      >
+                        View on {nominee.platform}
+                        <span aria-hidden="true">↗</span>
+                      </a>
+
+                      <button
+                        type="button"
+                        className="btn-p creative-award-vote-button"
+                        disabled={!contestant?.id}
+                        onClick={() =>
+                          openAwardVoteForContestant(contestant)
+                        }
+                      >
+                        {contestant?.id
+                          ? `Vote · KSh ${AWARD_VOTE_FEE} each`
+                          : "Voting Setup Pending"}
+                      </button>
+                    </div>
+                  </article>
+                );
+              })}
             </div>
           </article>
 
         </div>
 
-        <div className="special-awards-nomination reveal">
-          <span className="special-awards-nomination-kicker">
-            Nominations Open
-          </span>
-
-          <h3>
-            Know Someone Who Deserves Recognition?
-          </h3>
-
-          <p>
-            Nominate an outstanding creative or fashion industry personality
-            for one of these award categories. Send the nominee&apos;s full
-            name, award category, contact details, and a short reason for the
-            nomination by email.
+        {awardVoteMessage && (
+          <p className="award-vote-message creative-award-message reveal">
+            {awardVoteMessage}
           </p>
-
-          <a
-            className="special-awards-email"
-            href="mailto:faceoffagencieske@gmail.com?subject=Embu%20Fashion%20Awards%202026%20Nomination"
-          >
-            Nominate Your Candidate
-          </a>
-        </div>
+        )}
       </section>
 
       {/* =====================================================
@@ -6016,6 +6363,18 @@ export default function App() {
 
               </div>
 
+              <div className="partner-logo-card">
+
+                <img
+
+                  src={imageX}
+
+                  alt="The Mavvel Hotel"
+
+                />
+
+              </div>
+
             </div>
 
           </div>
@@ -6138,4 +6497,3 @@ export default function App() {
   );
 
 }
-
