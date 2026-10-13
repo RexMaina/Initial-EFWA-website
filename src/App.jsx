@@ -4,7 +4,30 @@ import { supabase } from "./lib/supabaseClient";
 import logo from "./assets/logo.jpeg";
 import efwaLogo from "./assets/efwa-logo.jpeg";
 import imager from "./assets/imager.jpeg";
-import image1 from "./assets/image1.jpeg";
+/* EFWA model showcase slideshow */
+import modelSlide31 from "./assets/image31.jpeg";
+import modelSlide30 from "./assets/image30.jpeg";
+import modelSlide29 from "./assets/image29.jpeg";
+import modelSlide21 from "./assets/image21.jpeg";
+import modelSlide22 from "./assets/image22.jpeg";
+import modelSlide28 from "./assets/image28.jpeg";
+import modelSlide27 from "./assets/image27.jpeg";
+import modelSlide26 from "./assets/image26.jpeg";
+import modelSlide25 from "./assets/image25.jpeg";
+import modelSlide24 from "./assets/image24.jpeg";
+import modelSlide23 from "./assets/image23.jpeg";
+import modelSlide20 from "./assets/image20.jpeg";
+import modelSlide19 from "./assets/image19.jpeg";
+import modelSlide18 from "./assets/image18.jpeg";
+import modelSlide17 from "./assets/image17.jpeg";
+import modelSlide16 from "./assets/image16.jpeg";
+import modelSlide15 from "./assets/image15.jpeg";
+import modelSlide14 from "./assets/image14.jpeg";
+import modelSlide13 from "./assets/image13.jpeg";
+import modelSlide12 from "./assets/image12.jpeg";
+import modelSlide11 from "./assets/image11.jpeg";
+import modelSlide33 from "./assets/image33.jpeg";
+import modelSlide32 from "./assets/image32.jpeg";
 import image2 from "./assets/image2.jpg";
 import image3 from "./assets/image3.jpg";
 import image6 from "./assets/image6.jpeg";
@@ -71,6 +94,32 @@ import leoMuthendePhoto from "./assets/Hon. Leo Wa Muthende Mp Mbeere North.jpeg
 import njeriMainaPhoto from "./assets/Hon. Njeri Maina Women Rep Kirinyaga County.jpeg";
 import ashleyMurugiPhoto from "./assets/Ashley Murugi.jpeg";
 
+const EFWA_MODEL_SLIDES = [
+  { src: modelSlide31, alt: "Face Off Agencies model showcase 1" },
+  { src: modelSlide30, alt: "Face Off Agencies model showcase 2" },
+  { src: modelSlide29, alt: "Face Off Agencies model showcase 3" },
+  { src: modelSlide21, alt: "Face Off Agencies model showcase 4" },
+  { src: modelSlide22, alt: "Face Off Agencies model showcase 5" },
+  { src: modelSlide28, alt: "Face Off Agencies model showcase 6" },
+  { src: modelSlide27, alt: "Face Off Agencies model showcase 7" },
+  { src: modelSlide26, alt: "Face Off Agencies model showcase 8" },
+  { src: modelSlide25, alt: "Face Off Agencies model showcase 9" },
+  { src: modelSlide24, alt: "Face Off Agencies model showcase 10" },
+  { src: modelSlide23, alt: "Face Off Agencies model showcase 11" },
+  { src: modelSlide20, alt: "Face Off Agencies model showcase 12" },
+  { src: modelSlide19, alt: "Face Off Agencies model showcase 13" },
+  { src: modelSlide18, alt: "Face Off Agencies model showcase 14" },
+  { src: modelSlide17, alt: "Face Off Agencies model showcase 15" },
+  { src: modelSlide16, alt: "Face Off Agencies model showcase 16" },
+  { src: modelSlide15, alt: "Face Off Agencies model showcase 17" },
+  { src: modelSlide14, alt: "Face Off Agencies model showcase 18" },
+  { src: modelSlide13, alt: "Face Off Agencies model showcase 19" },
+  { src: modelSlide12, alt: "Face Off Agencies model showcase 20" },
+  { src: modelSlide11, alt: "Face Off Agencies model showcase 21" },
+  { src: modelSlide33, alt: "Face Off Agencies model showcase 22" },
+  { src: modelSlide32, alt: "Face Off Agencies model showcase 23" },
+];
+
 const initialFormData = {
 
   fullName: "",
@@ -134,12 +183,12 @@ const AWARD_VOTE_FEE = 10;
 
 const PHOTOGRAPHER_AWARD_NOMINEES = [
   {
-    name: "Kanambo Photography",
-    slug: "kanambo-photography-2026",
-    photo: imageKanambo,
+    name: "Chilla Art Photography",
+    slug: "chilla-art-photography-2026",
+    photo: imageChilla,
     platform: "Instagram",
     socialUrl:
-      "https://www.instagram.com/konambo_pics?stkn=b2syYm81aDdmM3kz",
+      "https://www.instagram.com/chillaphotography?stkn=dHN3ajY4N2Z0dDd6",
   },
   {
     name: "Charry Studios",
@@ -169,12 +218,12 @@ const PHOTOGRAPHER_AWARD_NOMINEES = [
 
 const VIDEOGRAPHER_AWARD_NOMINEES = [
   {
-    name: "Chilla Art Photography",
-    slug: "chilla-art-photography-2026",
-    photo: imageChilla,
+    name: "Kanambo Photography",
+    slug: "kanambo-photography-2026",
+    photo: imageKanambo,
     platform: "Instagram",
     socialUrl:
-      "https://www.instagram.com/chillaphotography?stkn=dHN3ajY4N2Z0dDd6",
+      "https://www.instagram.com/konambo_pics?stkn=b2syYm81aDdmM3kz",
   },
   {
     name: "Kelvin Kamau",
@@ -450,6 +499,9 @@ export default function App() {
 
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const [modelSlideIndex, setModelSlideIndex] = useState(0);
+  const [modelSliderPaused, setModelSliderPaused] = useState(false);
+
   const [applicationOpen, setApplicationOpen] = useState(false);
 
   const [formData, setFormData] = useState(initialFormData);
@@ -581,6 +633,38 @@ export default function App() {
       return Number(a.display_order || 0) - Number(b.display_order || 0);
     }
   );
+
+  /* =========================================================
+     EFWA MODEL SHOWCASE SLIDESHOW
+  ========================================================= */
+
+  useEffect(() => {
+    if (modelSliderPaused || EFWA_MODEL_SLIDES.length <= 1) return undefined;
+
+    const intervalId = window.setInterval(() => {
+      setModelSlideIndex(
+        (currentIndex) =>
+          (currentIndex + 1) % EFWA_MODEL_SLIDES.length
+      );
+    }, 3500);
+
+    return () => window.clearInterval(intervalId);
+  }, [modelSliderPaused]);
+
+  const showPreviousModelSlide = () => {
+    setModelSlideIndex(
+      (currentIndex) =>
+        (currentIndex - 1 + EFWA_MODEL_SLIDES.length) %
+        EFWA_MODEL_SLIDES.length
+    );
+  };
+
+  const showNextModelSlide = () => {
+    setModelSlideIndex(
+      (currentIndex) =>
+        (currentIndex + 1) % EFWA_MODEL_SLIDES.length
+    );
+  };
 
   /* =========================================================
 
@@ -2971,6 +3055,21 @@ useEffect(() => {
 
           </li>
 
+          <li className="mobile-book-item mobile-ticket-item">
+
+            <a
+              href="https://thesocialboost.co.ke/"
+              className="mobile-book mobile-ticket-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMenuOpen(false)}
+            >
+              Buy Tickets
+              <span aria-hidden="true"> ↗</span>
+            </a>
+
+          </li>
+
           <li className="mobile-book-item">
 
             <a
@@ -2992,6 +3091,16 @@ useEffect(() => {
         </ul>
 
         <div className="nav-actions">
+
+          <a
+            href="https://thesocialboost.co.ke/"
+            className="nav-ticket-cta"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Buy Tickets
+            <span aria-hidden="true">↗</span>
+          </a>
 
           <a
 
@@ -3084,6 +3193,25 @@ useEffect(() => {
           </p>
 
           <div className="hero-actions">
+
+            <a
+              href="https://thesocialboost.co.ke/"
+              className="hero-ticket-button"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span className="hero-ticket-button-copy">
+                <small>Embu Fashion Weekend &amp; Awards 2026</small>
+                <strong>Buy Tickets</strong>
+              </span>
+
+              <span
+                className="hero-ticket-button-icon"
+                aria-hidden="true"
+              >
+                ↗
+              </span>
+            </a>
 
             <a
 
@@ -3301,22 +3429,86 @@ useEffect(() => {
 
           </div>
 
-          <div className="efwa-feature-media">
+          <div
+            className="efwa-feature-media efwa-model-slider"
+            onMouseEnter={() => setModelSliderPaused(true)}
+            onMouseLeave={() => setModelSliderPaused(false)}
+            onFocus={() => setModelSliderPaused(true)}
+            onBlur={(event) => {
+              if (!event.currentTarget.contains(event.relatedTarget)) {
+                setModelSliderPaused(false);
+              }
+            }}
+          >
+            <div className="efwa-model-slider-stage">
+              {EFWA_MODEL_SLIDES.map((slide, index) => (
+                <figure
+                  key={slide.src}
+                  className={`efwa-model-slide ${
+                    index === modelSlideIndex ? "active" : ""
+                  }`}
+                  aria-hidden={index !== modelSlideIndex}
+                >
+                  <img
+                    src={slide.src}
+                    alt={index === modelSlideIndex ? slide.alt : ""}
+                    loading={index === 0 ? "eager" : "lazy"}
+                  />
+                </figure>
+              ))}
 
-            <img
+              <div className="efwa-model-slider-overlay" aria-hidden="true" />
 
-              src={image1}
+              <div className="efwa-model-slider-badge">
+                <span>Face Off Models</span>
+                <strong>
+                  {String(modelSlideIndex + 1).padStart(2, "0")}
+                  <em>/</em>
+                  {String(EFWA_MODEL_SLIDES.length).padStart(2, "0")}
+                </strong>
+              </div>
 
-              alt="High fashion runway experience at Embu Fashion Weekend"
+              <button
+                type="button"
+                className="efwa-model-slider-arrow efwa-model-slider-prev"
+                onClick={showPreviousModelSlide}
+                aria-label="Show previous model photo"
+              >
+                <span aria-hidden="true">←</span>
+              </button>
 
-            />
-
-            <div className="efwa-image-caption">
-
-
-
+              <button
+                type="button"
+                className="efwa-model-slider-arrow efwa-model-slider-next"
+                onClick={showNextModelSlide}
+                aria-label="Show next model photo"
+              >
+                <span aria-hidden="true">→</span>
+              </button>
             </div>
 
+            <div className="efwa-model-slider-footer">
+              <div className="efwa-model-slider-copy">
+                <span>Face Off Agencies Kenya</span>
+                <strong>Runway · Talent · Experience</strong>
+              </div>
+
+              <div
+                className="efwa-model-slider-dots"
+                aria-label="Choose model photo"
+              >
+                {EFWA_MODEL_SLIDES.map((slide, index) => (
+                  <button
+                    key={`${slide.src}-dot`}
+                    type="button"
+                    className={index === modelSlideIndex ? "active" : ""}
+                    onClick={() => setModelSlideIndex(index)}
+                    aria-label={`Show model photo ${index + 1}`}
+                    aria-current={index === modelSlideIndex ? "true" : undefined}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
 
         </div>
