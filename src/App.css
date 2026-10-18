@@ -13284,3 +13284,470 @@ img {
   color: #000000;
   box-shadow: none;
 }
+
+/* =========================================================
+   FINAL MOBILE BUY TICKETS + 7 PARTNERS
+   - Keeps the existing desktop navigation design
+   - Buy Tickets remains visible in the top bar on phones
+   - Vote Now stays inside the mobile menu
+   - All 7 partner logos stay on one line
+========================================================= */
+
+/* =========================================================
+   MOBILE / TABLET NAVIGATION
+========================================================= */
+
+@media (max-width: 900px) {
+
+  nav,
+  nav.scrolled {
+    display: flex;
+    align-items: center;
+
+    gap: .45rem;
+
+    padding-left: .75rem;
+    padding-right: .75rem;
+  }
+
+  /* Keep the EFWA identity visible but compact enough
+     to leave room for Buy Tickets + hamburger. */
+
+  .logo {
+    flex: 1 1 auto;
+    min-width: 0;
+
+    gap: .5rem;
+  }
+
+  .logo-mark,
+  nav.scrolled .logo-mark {
+    width: 54px !important;
+    height: 40px !important;
+
+    flex: 0 0 54px;
+
+    padding: 0 !important;
+
+    background: transparent !important;
+
+    border: 0 !important;
+    border-radius: 0 !important;
+
+    box-shadow: none !important;
+
+    overflow: hidden !important;
+  }
+
+  .logo-mark img,
+  nav.scrolled .logo-mark img {
+    width: 54px !important;
+    height: 40px !important;
+
+    max-width: 54px !important;
+    max-height: 40px !important;
+
+    object-fit: contain;
+    object-position: center;
+
+    border-radius: 0 !important;
+  }
+
+  .logo-text {
+    min-width: 0;
+  }
+
+  .logo-text strong {
+    font-size: .78rem !important;
+    line-height: 1 !important;
+    letter-spacing: .015em !important;
+    white-space: nowrap;
+  }
+
+  .logo-text em {
+    margin-top: .18rem !important;
+
+    font-size: .34rem !important;
+    line-height: 1 !important;
+    letter-spacing: .12em !important;
+
+    white-space: nowrap;
+  }
+
+  /* The Buy Tickets CTA is OUTSIDE the toggled menu and stays
+     visible directly beside the event identity. */
+
+  .nav-actions {
+    display: flex !important;
+    align-items: center;
+
+    gap: .28rem !important;
+
+    flex: 0 0 auto;
+
+    margin-left: .2rem !important;
+  }
+
+  .nav-actions .nav-ticket-cta,
+  .nav-ticket-cta {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+
+    gap: .32rem;
+
+    min-width: auto !important;
+    min-height: 38px !important;
+
+    padding: .58rem .72rem !important;
+
+    flex: 0 0 auto;
+
+    border-radius: 999px !important;
+
+    white-space: nowrap;
+
+    font-size: .62rem !important;
+    font-weight: 700;
+  }
+
+  .nav-ticket-cta span {
+    font-size: .74rem !important;
+  }
+
+  /* The separate desktop Vote Now button is hidden on phones.
+     Vote Now remains available inside the hamburger menu. */
+
+  .nav-actions .nav-cta {
+    display: none !important;
+  }
+
+  .menu-toggle {
+    display: flex !important;
+
+    width: 38px !important;
+    height: 38px !important;
+
+    flex: 0 0 38px;
+  }
+}
+
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media (max-width: 600px) {
+
+  nav,
+  nav.scrolled {
+    gap: .3rem;
+
+    padding-left: .55rem;
+    padding-right: .55rem;
+  }
+
+  .logo {
+    gap: .36rem;
+  }
+
+  .logo-mark,
+  nav.scrolled .logo-mark {
+    width: 44px !important;
+    height: 34px !important;
+
+    flex-basis: 44px;
+  }
+
+  .logo-mark img,
+  nav.scrolled .logo-mark img {
+    width: 44px !important;
+    height: 34px !important;
+
+    max-width: 44px !important;
+    max-height: 34px !important;
+  }
+
+  .logo-text strong {
+    font-size: .66rem !important;
+    letter-spacing: .008em !important;
+  }
+
+  .logo-text em {
+    margin-top: .14rem !important;
+
+    font-size: .275rem !important;
+    letter-spacing: .075em !important;
+  }
+
+  .nav-actions {
+    gap: .18rem !important;
+    margin-left: .1rem !important;
+  }
+
+  .nav-actions .nav-ticket-cta,
+  .nav-ticket-cta {
+    min-height: 34px !important;
+
+    padding: .5rem .58rem !important;
+
+    font-size: .54rem !important;
+  }
+
+  .nav-ticket-cta span {
+    font-size: .64rem !important;
+  }
+
+  .menu-toggle {
+    width: 34px !important;
+    height: 34px !important;
+
+    flex-basis: 34px;
+  }
+
+  .menu-toggle span {
+    width: 20px !important;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 380px) {
+
+  nav,
+  nav.scrolled {
+    padding-left: .42rem;
+    padding-right: .42rem;
+  }
+
+  .logo-mark,
+  nav.scrolled .logo-mark {
+    width: 38px !important;
+    height: 30px !important;
+
+    flex-basis: 38px;
+  }
+
+  .logo-mark img,
+  nav.scrolled .logo-mark img {
+    width: 38px !important;
+    height: 30px !important;
+
+    max-width: 38px !important;
+    max-height: 30px !important;
+  }
+
+  .logo-text strong {
+    font-size: .59rem !important;
+  }
+
+  .logo-text em {
+    font-size: .235rem !important;
+    letter-spacing: .045em !important;
+  }
+
+  .nav-actions .nav-ticket-cta,
+  .nav-ticket-cta {
+    min-height: 32px !important;
+
+    padding: .46rem .5rem !important;
+
+    font-size: .5rem !important;
+  }
+
+  .nav-ticket-cta span {
+    font-size: .58rem !important;
+  }
+
+  .menu-toggle {
+    width: 32px !important;
+    height: 32px !important;
+
+    flex-basis: 32px;
+  }
+}
+
+
+/* =========================================================
+   PARTNERS — 7 LOGOS IN ONE LINE
+========================================================= */
+
+.efwa-closing-section .partners-logo-row {
+  width: min(100%, 1100px) !important;
+
+  display: grid !important;
+
+  grid-template-columns:
+    repeat(7, minmax(0, 1fr)) !important;
+
+  align-items: center;
+  justify-items: center;
+
+  gap: clamp(.45rem, 1vw, 1rem) !important;
+
+  margin: 1.8rem auto 0;
+}
+
+.efwa-closing-section .partner-logo-card {
+  width: 100% !important;
+  min-width: 0;
+
+  height: 92px !important;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.efwa-closing-section .partner-logo-card img {
+  width: auto !important;
+  height: auto !important;
+
+  max-width: 82px !important;
+  max-height: 68px !important;
+
+  object-fit: contain;
+  object-position: center;
+
+  border-radius: 0 !important;
+}
+
+
+@media (max-width: 900px) {
+
+  .efwa-closing-section .partners-logo-row {
+    grid-template-columns:
+      repeat(7, minmax(0, 1fr)) !important;
+
+    gap: .45rem !important;
+  }
+
+  .efwa-closing-section .partner-logo-card {
+    height: 76px !important;
+  }
+
+  .efwa-closing-section .partner-logo-card img {
+    max-width: 58px !important;
+    max-height: 50px !important;
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .efwa-closing-section .partners-logo-row {
+    grid-template-columns:
+      repeat(7, minmax(0, 1fr)) !important;
+
+    gap: .24rem !important;
+  }
+
+  .efwa-closing-section .partner-logo-card {
+    height: 60px !important;
+  }
+
+  .efwa-closing-section .partner-logo-card img {
+    max-width: 43px !important;
+    max-height: 38px !important;
+  }
+}
+
+
+@media (max-width: 380px) {
+
+  .efwa-closing-section .partners-logo-row {
+    gap: .16rem !important;
+  }
+
+  .efwa-closing-section .partner-logo-card {
+    height: 52px !important;
+  }
+
+  .efwa-closing-section .partner-logo-card img {
+    max-width: 37px !important;
+    max-height: 33px !important;
+  }
+}
+
+@media (max-width: 520px) {
+
+  nav {
+    column-gap: .4rem !important;
+    padding-left: .7rem !important;
+    padding-right: .7rem !important;
+  }
+
+  .nav-ticket-cta {
+    padding: .55rem .75rem !important;
+    font-size: .6rem !important;
+  }
+
+  .menu-toggle {
+    width: 38px;
+    height: 38px;
+  }
+}
+/* =========================================================
+   MOBILE NAV — LOGO | BUY TICKETS | MENU
+========================================================= */
+
+@media (max-width: 900px) {
+
+  nav {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) auto auto !important;
+    align-items: center !important;
+
+    column-gap: .65rem !important;
+  }
+
+  /* EFWA logo + name stays on the left */
+  .logo {
+    grid-column: 1;
+    justify-self: start;
+    min-width: 0;
+  }
+
+  /*
+    Allow Buy Tickets and hamburger to behave
+    as separate grid items.
+  */
+  .nav-actions {
+    display: contents !important;
+  }
+
+  /* BUY TICKETS — middle */
+  .nav-ticket-cta {
+    display: inline-flex !important;
+
+    grid-column: 2;
+
+    justify-self: center;
+    align-self: center;
+
+    min-width: auto !important;
+
+    padding: .65rem 1rem !important;
+
+    font-size: .7rem !important;
+
+    white-space: nowrap;
+  }
+
+  /* Hide desktop Vote Now button */
+  .nav-cta {
+    display: none !important;
+  }
+
+  /* Hamburger — far right */
+  .menu-toggle {
+    display: flex !important;
+
+    grid-column: 3;
+
+    justify-self: end;
+  }
+}

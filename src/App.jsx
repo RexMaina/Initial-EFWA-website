@@ -45,6 +45,7 @@ import imageD from "./assets/imaged.png";
 import image4 from "./assets/image4.jpg";
 import wingurent from "./assets/wingurent.png";
 import imageX from "./assets/imagex.jpeg";
+import imageEvent from "./assets/imageevent.jpeg";
 
 /* What to Expect experience images */
 import imageHigh from "./assets/imagehigh.jpeg";
@@ -3051,21 +3052,6 @@ useEffect(() => {
 
               Contact
 
-            </a>
-
-          </li>
-
-          <li className="mobile-book-item mobile-ticket-item">
-
-            <a
-              href="https://thesocialboost.co.ke/"
-              className="mobile-book mobile-ticket-link"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setMenuOpen(false)}
-            >
-              Buy Tickets
-              <span aria-hidden="true"> ↗</span>
             </a>
 
           </li>
@@ -6562,6 +6548,18 @@ useEffect(() => {
                   src={imageX}
 
                   alt="The Mavvel Hotel"
+
+                />
+
+              </div>
+
+              <div className="partner-logo-card">
+
+                <img
+
+                  src={imageEvent}
+
+                  alt="001 Events and Adventures"
 
                 />
 
