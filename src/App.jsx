@@ -28,6 +28,28 @@ import modelSlide12 from "./assets/image12.jpeg";
 import modelSlide11 from "./assets/image11.jpeg";
 import modelSlide33 from "./assets/image33.jpeg";
 import modelSlide32 from "./assets/image32.jpeg";
+import modelSlide55 from "./assets/image55.jpeg";
+import modelSlide34 from "./assets/image34.jpeg";
+import modelSlide35 from "./assets/image35.jpeg";
+import modelSlide36 from "./assets/image36.jpeg";
+import modelSlide37 from "./assets/image37.jpeg";
+import modelSlide38 from "./assets/image38.jpeg";
+import modelSlide39 from "./assets/image39.jpeg";
+import modelSlide40 from "./assets/image40.jpeg";
+import modelSlide41 from "./assets/image41.jpeg";
+import modelSlide42 from "./assets/image42.jpeg";
+import modelSlide43 from "./assets/image43.jpeg";
+import modelSlide44 from "./assets/image44.jpeg";
+import modelSlide45 from "./assets/image45.jpeg";
+import modelSlide46 from "./assets/image46.jpeg";
+import modelSlide47 from "./assets/image47.jpeg";
+import modelSlide48 from "./assets/image48.jpeg";
+import modelSlide49 from "./assets/image49.jpeg";
+import modelSlide50 from "./assets/image50.jpeg";
+import modelSlide51 from "./assets/image51.jpeg";
+import modelSlide52 from "./assets/image52.jpeg";
+import modelSlide53 from "./assets/image53.jpeg";
+import modelSlide54 from "./assets/image54.jpeg";
 import image2 from "./assets/image2.jpg";
 import image3 from "./assets/image3.jpg";
 import image6 from "./assets/image6.jpeg";
@@ -119,6 +141,28 @@ const EFWA_MODEL_SLIDES = [
   { src: modelSlide11, alt: "Face Off Agencies model showcase 21" },
   { src: modelSlide33, alt: "Face Off Agencies model showcase 22" },
   { src: modelSlide32, alt: "Face Off Agencies model showcase 23" },
+  { src: modelSlide55, alt: "Face Off Agencies model showcase 24" },
+  { src: modelSlide34, alt: "Face Off Agencies model showcase 25" },
+  { src: modelSlide35, alt: "Face Off Agencies model showcase 26" },
+  { src: modelSlide36, alt: "Face Off Agencies model showcase 27" },
+  { src: modelSlide37, alt: "Face Off Agencies model showcase 28" },
+  { src: modelSlide38, alt: "Face Off Agencies model showcase 29" },
+  { src: modelSlide39, alt: "Face Off Agencies model showcase 30" },
+  { src: modelSlide40, alt: "Face Off Agencies model showcase 31" },
+  { src: modelSlide41, alt: "Face Off Agencies model showcase 32" },
+  { src: modelSlide42, alt: "Face Off Agencies model showcase 33" },
+  { src: modelSlide43, alt: "Face Off Agencies model showcase 34" },
+  { src: modelSlide44, alt: "Face Off Agencies model showcase 35" },
+  { src: modelSlide45, alt: "Face Off Agencies model showcase 36" },
+  { src: modelSlide46, alt: "Face Off Agencies model showcase 37" },
+  { src: modelSlide47, alt: "Face Off Agencies model showcase 38" },
+  { src: modelSlide48, alt: "Face Off Agencies model showcase 39" },
+  { src: modelSlide49, alt: "Face Off Agencies model showcase 40" },
+  { src: modelSlide50, alt: "Face Off Agencies model showcase 41" },
+  { src: modelSlide51, alt: "Face Off Agencies model showcase 42" },
+  { src: modelSlide52, alt: "Face Off Agencies model showcase 43" },
+  { src: modelSlide53, alt: "Face Off Agencies model showcase 44" },
+  { src: modelSlide54, alt: "Face Off Agencies model showcase 45" },
 ];
 
 const initialFormData = {
