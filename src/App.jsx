@@ -2727,17 +2727,6 @@ useEffect(() => {
       return;
     }
 
-    /*
-     * Check the server BEFORE sending an OTP.
-     *
-     * This prevents unnecessary verification emails when the same email
-     * has already cast a Fashion Enthusiast Leader vote within the
-     * rolling 24-hour window.
-     *
-     * IMPORTANT: this is only a pre-check for user experience.
-     * The final cast-fashion-leader-vote Edge Function still enforces
-     * the 24-hour restriction again after email verification.
-     */
     setFashionLeaderStage("checking_eligibility");
     setFashionLeaderMessage("Checking whether this email is eligible to vote...");
 
@@ -3325,73 +3314,29 @@ useEffect(() => {
 
               <strong>
 
-                1st Edition of Embu Fashion Weekend &amp;
+                Embu Fashion Weekend &amp;
 
                 Awards
 
               </strong>{" "}
 
-              is a family-friendly, multidisciplinary
+            Awards is a creative lifestyle platform celebrating the culture, talent and creativity, of the Mt. Kenya region and the Kenyan people.
 
-              creative economy and lifestyle platform
+            
 
-              celebrating the talent, creativity, and
 
-              entrepreneurial potential of the Mt. Kenya
-
-              region.
 
             </p>
 
             <p>
 
-              Hosted at The Mavvel Hotel, Embu, the
-
-              one-day-to-night experience brings together
-
-              fashion, music, art, lifestyle, and hospitality
-
-              in one vibrant platform.
+            Hosted at The Mavvel Hotel, the one-day-to-night experience brings together professionals from the Fashion, Music, Art, and Hospitality industries to showcase what Embu County and it's neighbours have to offer.  
 
             </p>
 
             <p>
+            From High Fashion runways with emerging and established fashion designers, live music performances, art exhibitions and wine tasting. We are an open-air meet-and-greet experience.
 
-              Guests will experience a{" "}
-
-              <strong>
-
-                High Fashion runway showcase
-
-              </strong>{" "}
-
-              featuring emerging and established fashion
-
-              designers from the Mt. Kenya region,{" "}
-
-              <strong>
-
-                live music performances
-
-              </strong>
-
-              , an{" "}
-
-              <strong>
-
-                art exhibition by Nakuru Art Gallery
-
-              </strong>
-
-              , <strong>wine tasting</strong>, and an
-
-              open-air{" "}
-
-              <strong>
-
-                meet-and-greet experience with an open bar
-
-              </strong>
 
               .
 
@@ -3399,17 +3344,7 @@ useEffect(() => {
 
             <p>
 
-              Beyond entertainment, Embu Fashion Weekend
-
-              &amp; Awards provides a platform for creatives
-
-              and performing artists to showcase their work,
-
-              build meaningful connections, access new
-
-              audiences, and explore creative entrepreneurship
-
-              as a sustainable career pathway.
+             Beyond entertainment, Embu Fashion Weekend &amp; Awards provides spaces to build meaningful connections, access new audiences, and explore creative entrepreneurship as a sustainable career pathway.
 
             </p>
 
