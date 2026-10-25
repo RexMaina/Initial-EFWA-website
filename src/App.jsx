@@ -66,7 +66,6 @@ import imageC from "./assets/imagec.jpeg";
 import imageD from "./assets/imaged.png";
 import image4 from "./assets/image4.jpg";
 import wingurent from "./assets/wingurent.png";
-import imageX from "./assets/imagex.jpeg";
 import imageEvent from "./assets/imageevent.jpeg";
 
 /* What to Expect experience images */
@@ -3374,7 +3373,7 @@ useEffect(() => {
 
             <p>
 
-            Hosted at The Mavvel Hotel, the one-day-to-night experience brings together professionals from the Fashion, Music, Art, and Hospitality industries to showcase what Embu County and it's neighbours have to offer.  
+            Hosted at Winter Villa Resort and Spa, Embu, the one-day-to-night experience brings together professionals from the Fashion, Music, Art, and Hospitality industries to showcase what Embu County and it's neighbours have to offer.  
 
             </p>
 
@@ -6515,18 +6514,6 @@ useEffect(() => {
                   src={wingurent}
 
                   alt="Wingurent"
-
-                />
-
-              </div>
-
-              <div className="partner-logo-card">
-
-                <img
-
-                  src={imageX}
-
-                  alt="The Mavvel Hotel"
 
                 />
 
